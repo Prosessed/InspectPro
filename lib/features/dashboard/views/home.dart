@@ -100,7 +100,7 @@ class Home extends StatelessWidget {
           ),
           body: Obx(
             () => controller.isLoading.value
-                ? Center(
+                ? const Center(
                     child: LoadingDialog(),
                   )
                 : Container(
@@ -380,6 +380,8 @@ class TaskItem extends StatelessWidget {
 }
 
 class LoadingDialog extends StatelessWidget {
+  const LoadingDialog({super.key});
+
   @override
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
@@ -387,7 +389,7 @@ class LoadingDialog extends StatelessWidget {
       backgroundColor: Colors.transparent,
       elevation: 0,
       child: Container(
-        decoration: BoxDecoration(),
+        decoration: const BoxDecoration(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

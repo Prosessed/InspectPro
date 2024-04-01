@@ -1,11 +1,8 @@
-import 'dart:ffi';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:processed/features/inspection/controllers/InspectionController.dart';
-import 'package:processed/utils/helpers/helper_functions.dart';
 import 'package:signature/signature.dart';
 
 class SignaturePadController extends GetxController {
@@ -33,8 +30,4 @@ class SignaturePadController extends GetxController {
     InspectionController.instance.signature.value = data;
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-  }
 }

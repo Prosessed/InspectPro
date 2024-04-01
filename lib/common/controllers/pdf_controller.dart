@@ -1,10 +1,7 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:get/get.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:processed/features/completed/controllers/completed_controller.dart';
-import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
 
 class PdfController extends GetxController {

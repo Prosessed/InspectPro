@@ -26,7 +26,7 @@ class SignUpForm extends StatelessWidget {
                   decoration: InputDecoration(
                       labelText: TTexts.firstName,
                       labelStyle: TextStyle(fontSize: 12.sp),
-                      prefixIcon: Icon(Iconsax.user)),
+                      prefixIcon: const Icon(Iconsax.user)),
                 ),
               ),
               const SizedBox(width: TSizes.spaceBtwInputFields),
@@ -37,7 +37,7 @@ class SignUpForm extends StatelessWidget {
                   decoration: InputDecoration(
                       labelText: TTexts.lastName,
                       labelStyle: TextStyle(fontSize: 12.sp),
-                      prefixIcon: Icon(Iconsax.user)),
+                      prefixIcon: const Icon(Iconsax.user)),
                 ),
               ),
             ],
@@ -50,7 +50,7 @@ class SignUpForm extends StatelessWidget {
             decoration: InputDecoration(
                 labelText: TTexts.designation,
                 labelStyle: TextStyle(fontSize: 12.sp),
-                prefixIcon: Icon(Iconsax.user_edit)),
+                prefixIcon: const Icon(Iconsax.user_edit)),
           ),
           const SizedBox(
             height: TSizes.spaceBtwInputFields,
@@ -59,7 +59,7 @@ class SignUpForm extends StatelessWidget {
             controller: SignUpController.instance.genderController,
             decoration: InputDecoration(
               labelText: TTexts.gender,
-              prefixIcon: Icon(Iconsax.user_edit),
+              prefixIcon: const Icon(Iconsax.user_edit),
               labelStyle: TextStyle(fontSize: 12.sp),
             ),
           ),
@@ -72,7 +72,7 @@ class SignUpForm extends StatelessWidget {
             decoration: InputDecoration(
                 labelStyle: TextStyle(fontSize: 12.sp),
                 labelText: TTexts.email,
-                prefixIcon: Icon(Iconsax.calendar)),
+                prefixIcon: const Icon(Iconsax.calendar)),
           ),
           const SizedBox(
             height: TSizes.spaceBtwInputFields,
@@ -84,7 +84,7 @@ class SignUpForm extends StatelessWidget {
             decoration: InputDecoration(
                 labelStyle: TextStyle(fontSize: 12.sp),
                 labelText: TTexts.phoneNo,
-                prefixIcon: Icon(Iconsax.mobile)),
+                prefixIcon: const Icon(Iconsax.mobile)),
           ),
           const SizedBox(
             height: TSizes.spaceBtwInputFields,
@@ -94,7 +94,7 @@ class SignUpForm extends StatelessWidget {
             decoration: InputDecoration(
                 labelStyle: TextStyle(fontSize: 12.sp),
                 labelText: TTexts.companyName,
-                prefixIcon: Icon(Iconsax.building)),
+                prefixIcon: const Icon(Iconsax.building)),
           ),
           const SizedBox(
             height: TSizes.spaceBtwSections,

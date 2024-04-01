@@ -350,7 +350,7 @@ class InspectionForm extends StatelessWidget {
                               decoration: InputDecoration(
                                   labelStyle: TextStyle(fontSize: 12.sp),
                                   labelText: TTexts.batchNo,
-                                  prefixIcon: Icon(Iconsax.note)),
+                                  prefixIcon: const Icon(Iconsax.note)),
                             ),
                             const SizedBox(
                               height: TSizes.spaceBtwInputFields,
@@ -361,7 +361,7 @@ class InspectionForm extends StatelessWidget {
                               decoration: InputDecoration(
                                   labelText: TTexts.sampleSize,
                                   labelStyle: TextStyle(fontSize: 12.sp),
-                                  prefixIcon: Icon(Iconsax.size)),
+                                  prefixIcon: const Icon(Iconsax.size)),
                             ),
                             const SizedBox(
                               height: TSizes.spaceBtwInputFields,

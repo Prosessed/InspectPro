@@ -1,14 +1,11 @@
-import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:processed/features/completed/models/completed_inspection_model.dart';
 import 'package:processed/utils/http/http_client.dart';
 import 'package:processed/utils/local_storage/db_helper.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CompletedController extends GetxController {
   // RxBool isLoading = true.obs;

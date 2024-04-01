@@ -1,12 +1,8 @@
 import 'dart:convert';
 import 'dart:typed_data';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:processed/features/completed/models/completed_inspection_model.dart';
-import 'package:processed/features/dashboard/controllers/HomeController.dart';
-import 'package:processed/features/dashboard/views/home.dart';
-import 'package:processed/features/inspection/controllers/InspectionController.dart';
 import 'package:processed/features/inspection/models/ItemModel.dart';
 import 'package:processed/utils/http/http_client.dart';
 import 'package:processed/utils/local_storage/db_helper.dart';
