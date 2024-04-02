@@ -37,6 +37,7 @@ class TImages {
   //Profile
 
   // -- Payment Methods
-  static const String googlePay =
-      "assets/icons/payment_methods/google-pay.webp";
+  static const String googlePay = "assets/logos/google_logo.webp";
+
+  static const String otp = "assets/logos/otp.webp";
 }

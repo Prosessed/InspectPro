@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:processed/features/authentication/controllers/login_controller.dart';
+import 'package:processed/features/authentication/views/resetpassword/screens/email_screen.dart';
 import 'package:processed/features/authentication/views/signup/screens/signup.dart';
 import 'package:processed/utils/constants/sizes.dart';
 import 'package:processed/utils/constants/text_strings.dart';
@@ -65,7 +67,20 @@ class LoginForm extends StatelessWidget {
                               )),
                           labelText: TTexts.password),
                     )),
-                const SizedBox(height: TSizes.spaceBtwSections),
+                const SizedBox(height: TSizes.inputFieldRadius),
+                GestureDetector(
+                  onTap: () => Get.to(ForgotEmail()),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Text(
+                        'Forgot Password',
+                        style: Theme.of(context).textTheme.labelSmall,
+                      )
+                    ],
+                  ),
+                ),
+                const SizedBox(height: TSizes.spaceBtwInputFields),
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
