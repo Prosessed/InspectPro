@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:processed/common/widgets/success.dart';
+import 'package:processed/features/authentication/controllers/signup_controller.dart';
 import 'package:processed/utils/constants/colors.dart';
 import 'package:processed/utils/constants/sizes.dart';
 import 'package:processed/utils/helpers/helper_functions.dart';
 
 class CreateNewPassword extends StatelessWidget {
-  const CreateNewPassword({super.key});
+  SignUpController signUpController = Get.find<SignUpController>();
+  CreateNewPassword({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,123 +34,135 @@ class CreateNewPassword extends StatelessWidget {
           ),
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(TSizes.defaultSpace),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(TSizes.defaultSpace),
-              child: Column(
-                children: [
-                  Center(
-                    child: Text(
-                      'Create a New Password',
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.headlineLarge,
-                    ),
-                  ),
-                  Center(
-                    child: Container(
-                      padding: EdgeInsets.only(top: 5.h),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(TSizes.defaultSpace),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(TSizes.defaultSpace),
+                child: Column(
+                  children: [
+                    Center(
                       child: Text(
-                        'Enter your new password',
-                        style: Theme.of(context).textTheme.labelMedium,
+                        'Secure Your Account',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headlineLarge,
                       ),
                     ),
+                    Center(
+                      child: Container(
+                        padding: EdgeInsets.only(top: 5.h),
+                        child: Text(
+                          'Setting Up a Strong New Password',
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: TSizes.spaceBtwItems,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'New Password*',
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                  const SizedBox(
+                    height: TSizes.spaceBtwInputFields,
+                  ),
+                  TextFormField(
+                    // obscureText: authController.isPasswordVisible.value,
+                    controller: signUpController.passwordController,
+                    decoration: InputDecoration(
+                        labelStyle: Theme.of(context).textTheme.labelMedium,
+                        prefixIcon: const Icon(Iconsax.password_check4),
+                        // suffixIcon: GestureDetector(
+                        //     onTap: () =>
+                        //         authController.togglePasswordVisibility(),
+                        //     child: Icon(
+                        //       authController.isPasswordVisible.value
+                        //           ? Iconsax.eye_slash
+                        //           : Iconsax.eye,
+                        //     )),
+                        labelText: 'Enter new password'),
+                  ),
+                  const SizedBox(
+                    height: TSizes.spaceBtwInputFields,
+                  ),
+                  SizedBox(
+                    height: 150.h,
+                    child: FlutterPwValidator(
+                      controller: signUpController.passwordController,
+                      minLength: 6,
+                      uppercaseCharCount: 1,
+                      lowercaseCharCount: 2,
+                      numericCharCount: 3,
+                      specialCharCount: 1,
+                      width: 300.w,
+                      height: 100.h,
+                      onSuccess: () => {},
+                      onFail: () => {},
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(
+                height: TSizes.spaceBtwSections,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Confirm Password*',
+                    style: Theme.of(context).textTheme.labelMedium,
+                  ),
+                  const SizedBox(
+                    height: TSizes.spaceBtwInputFields,
+                  ),
+                  TextFormField(
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Enter a valid password!';
+                      }
+                      return null;
+                    },
+                    // obscureText: authController.isPasswordVisible.value,
+                    // controller: authController.passwordController,
+                    decoration: InputDecoration(
+                        labelStyle: Theme.of(context).textTheme.labelMedium,
+                        prefixIcon: const Icon(Iconsax.password_check4),
+                        // suffixIcon: GestureDetector(
+                        //     onTap: () =>
+                        //         // authController.togglePasswordVisibility(),
+                        //     child: Icon(
+                        //       authController.isPasswordVisible.value
+                        //           ? Iconsax.eye_slash
+                        //           : Iconsax.eye,
+                        //     )),
+                        labelText: 'Confirm your password'),
                   ),
                 ],
               ),
-            ),
-            const SizedBox(
-              height: TSizes.spaceBtwSections,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'New Password*',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                SizedBox(
-                  height: TSizes.spaceBtwInputFields,
-                ),
-                TextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Enter a valid password!';
-                    }
-                    return null;
-                  },
-                  // obscureText: authController.isPasswordVisible.value,
-                  // controller: authController.passwordController,
-                  decoration: InputDecoration(
-                      labelStyle: Theme.of(context).textTheme.labelMedium,
-                      prefixIcon: const Icon(Iconsax.password_check4),
-                      // suffixIcon: GestureDetector(
-                      //     onTap: () =>
-                      //         authController.togglePasswordVisibility(),
-                      //     child: Icon(
-                      //       authController.isPasswordVisible.value
-                      //           ? Iconsax.eye_slash
-                      //           : Iconsax.eye,
-                      //     )),
-                      labelText: 'Enter new password'),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: TSizes.spaceBtwInputFields,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Confirm Password*',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                const SizedBox(
-                  height: TSizes.spaceBtwInputFields,
-                ),
-                TextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Enter a valid password!';
-                    }
-                    return null;
-                  },
-                  // obscureText: authController.isPasswordVisible.value,
-                  // controller: authController.passwordController,
-                  decoration: InputDecoration(
-                      labelStyle: Theme.of(context).textTheme.labelMedium,
-                      prefixIcon: const Icon(Iconsax.password_check4),
-                      // suffixIcon: GestureDetector(
-                      //     onTap: () =>
-                      //         // authController.togglePasswordVisibility(),
-                      //     child: Icon(
-                      //       authController.isPasswordVisible.value
-                      //           ? Iconsax.eye_slash
-                      //           : Iconsax.eye,
-                      //     )),
-                      labelText: 'Confirm your password'),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: TSizes.spaceBtwSections,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  showDialog(
-                      context: context,
-                      builder: (ctxt) => new SuccessAlertDialog());
-                },
-                child: const Text('Next'),
+              const SizedBox(
+                height: TSizes.spaceBtwSections,
               ),
-            ),
-          ],
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    signUpController.signUp();
+                  },
+                  child: const Text('Create Account'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

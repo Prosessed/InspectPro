@@ -3,12 +3,27 @@ import 'package:http/http.dart' as http;
 
 class THttpHelper {
   static const String _baseUrl = 'https://app.prosessed.com';
-  static const String _apiKey = 'fc3886447b9c5a6';
-  static const String _apiSecret = 'f7c47f9ece18028';
+
+  static const String administratorApiKey = 'bbc7b66bb984d4a';
+
+  static const String administratorApiSecret = 'd7d3f56bb43f5c3';
+
+  //  jaspreet -> static const String _apiSecret = 'f7c47f9ece18028';
 
   static String get apiKey => _apiKey;
   static String get apiSecret => _apiSecret;
   static String get baseUrl => _baseUrl;
+
+  static String _apiKey = '';
+
+  set apiKeys(value) => _apiKey = value;
+
+  static String _apiSecret = '';
+
+  static void setApiKeys(String apiKey, String apiSecret) {
+    _apiKey = apiKey;
+    _apiSecret = apiSecret;
+  }
 
   // Helper method to make a GET request
   static Future<Set> get(String endpoint) async {

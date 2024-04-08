@@ -28,17 +28,18 @@ class TTexts {
   static const String onBoardingSubTitle5 =
       "Swiftly document every detail with rapid image uploads. Ensure meticulous inspections, facilitating in-depth product evaluations for quality assurance";
   // -- Authentication Forms
-  static const String firstName = "First Name";
-  static const String lastName = "Last Name";
-  static const String email = "E-Mail";
-  static const String password = "Password";
-  static const String newPassword = "New Password";
+  static const String firstName = "First Name*";
+  static const String lastName = "Last Name*";
+  static const String email = "E-Mail*";
+  static const String password = "Password*";
+  static const String newPassword = "New Password*";
   static const String username = "Username";
-  static const String phoneNo = "Phone Number";
+  static const String phoneNo = "Mobile Number*";
   static const String rememberMe = "Remember Me";
   static const String forgetPassword = "Forget Password?";
   static const String signIn = "Sign In";
   static const String createAccount = "Get Started";
+  static const String createUserAccount = "Create Account";
   static const String orSignInWith = "or sign in with";
   static const String sendAnEmail = "Send Email";
   static const String orSignUpWith = "or sign up with";
@@ -55,6 +56,9 @@ class TTexts {
       "Next-Generation Global Procurement Platform. Simplifying Sourcing!";
   static const String signupTitle =
       "Drop us a line! \nFill in your details below  🚀 ";
+
+  static const String createUserTitle =
+      "You are almost there!\nLet's us create a new password for you 🚀";
   static const String forgetPasswordTitle = "Forget password";
   static const String forgetPasswordSubTitle =
       "Don’t worry sometimes people can forget too, enter your email and we will send you a password reset link.";
@@ -79,9 +83,9 @@ class TTexts {
   static const String homeAppbarSubTitle = "Taimoor Sikander";
 
   static const String address = "Address";
-  static const String companyName = "Company Name";
-  static const String gender = "Gender";
-  static const String designation = "Designation";
+  static const String companyName = "Company Name*";
+  static const String gender = "Gender*";
+  static const String designation = "Designation*";
   static const String createInspection = "Create Inspection";
   static const String next = 'Next';
 

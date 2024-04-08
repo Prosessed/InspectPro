@@ -2,11 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:processed/common/styles/spacing_styles.dart';
 import 'package:processed/features/authentication/views/resetpassword/screens/crate_new_password.dart';
 import 'package:processed/utils/constants/colors.dart';
 import 'package:processed/utils/constants/sizes.dart';
-import 'package:processed/utils/constants/text_strings.dart';
 import 'package:processed/utils/helpers/helper_functions.dart';
 
 class ForgotEmail extends StatelessWidget {
@@ -91,7 +89,7 @@ class ForgotEmail extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  Get.to(() => const CreateNewPassword());
+                  Get.to(() => CreateNewPassword());
                 },
                 child: const Text('Next'),
               ),

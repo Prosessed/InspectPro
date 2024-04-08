@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:processed/features/authentication/controllers/signup_controller.dart';
+import 'package:processed/features/authentication/views/resetpassword/screens/crate_new_password.dart';
+import 'package:processed/features/authentication/views/signup/screens/create_user.dart';
 import 'package:processed/utils/constants/sizes.dart';
 import 'package:processed/utils/constants/text_strings.dart';
 import 'package:processed/utils/helpers/helper_functions.dart';
@@ -52,17 +55,17 @@ class SignUpForm extends StatelessWidget {
                 labelStyle: TextStyle(fontSize: 12.sp),
                 prefixIcon: const Icon(Iconsax.user_edit)),
           ),
-          const SizedBox(
-            height: TSizes.spaceBtwInputFields,
-          ),
-          TextFormField(
-            controller: SignUpController.instance.genderController,
-            decoration: InputDecoration(
-              labelText: TTexts.gender,
-              prefixIcon: const Icon(Iconsax.user_edit),
-              labelStyle: TextStyle(fontSize: 12.sp),
-            ),
-          ),
+          // const SizedBox(
+          //   height: TSizes.spaceBtwInputFields,
+          // ),
+          // TextFormField(
+          //   controller: SignUpController.instance.genderController,
+          //   decoration: InputDecoration(
+          //     labelText: TTexts.gender,
+          //     prefixIcon: const Icon(Iconsax.user_edit),
+          //     labelStyle: TextStyle(fontSize: 12.sp),
+          //   ),
+          // ),
           const SizedBox(
             height: TSizes.spaceBtwInputFields,
           ),
@@ -89,6 +92,7 @@ class SignUpForm extends StatelessWidget {
           const SizedBox(
             height: TSizes.spaceBtwInputFields,
           ),
+
           TextFormField(
             controller: SignUpController.instance.companyController,
             decoration: InputDecoration(
@@ -103,10 +107,11 @@ class SignUpForm extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () {
-                  SignUpController.instance.signUp();
+                  // SignUpController.instance.signUp();
+                  Get.to(() => CreateNewPassword());
                 },
                 child: Text(
-                  TTexts.submitDetails,
+                  TTexts.next,
                   style: Theme.of(context).textTheme.headlineSmall,
                 )),
           ),

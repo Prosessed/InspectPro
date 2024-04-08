@@ -6,37 +6,37 @@
 6
 7    <uses-sdk
 8        android:minSdkVersion="21"
-8-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml
+8-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml
 9        android:targetSdkVersion="33" />
-9-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml
+9-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-11-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:2:1-75
-11-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:2:18-72
+11-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:2:1-75
+11-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:2:18-72
 12    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-12-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:3:1-77
-12-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:3:18-74
+12-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:3:1-77
+12-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:3:18-74
 13    <uses-permission android:name="android.permission.INTERNET" />
-13-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:4:1-62
-13-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:4:18-60
+13-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:4:1-62
+13-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:4:18-60
 14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-14-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:5:1-75
-14-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:5:18-73
+14-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:5:1-75
+14-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:5:18-73
 15    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-15-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:6:1-76
-15-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:6:18-74
+15-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:6:1-76
+15-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:6:18-74
 16
 17    <queries>
-17-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:39:6-44:15
+17-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:39:6-44:15
 18        <intent>
-18-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:40:9-43:18
+18-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:40:9-43:18
 19            <action android:name="android.intent.action.SENDTO" />
-19-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:41:13-67
-19-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:41:21-64
+19-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:41:13-67
+19-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:41:21-64
 20
 21            <data android:scheme="mailto" />
-21-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:42:13-45
-21-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:42:19-42
+21-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:42:13-45
+21-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:42:19-42
 22        </intent>
 23    </queries>
 24
@@ -53,29 +53,29 @@
 30
 31    <application
 32        android:name="android.app.Application"
-32-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:9:9-42
+32-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:9:9-42
 33        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
 33-->[androidx.core:core:1.10.1] /Users/jaspreetsinghsodhi/.gradle/caches/transforms-3/0235b77ff31bafac24f24ba4755d72b8/transformed/core-1.10.1/AndroidManifest.xml:28:18-86
 34        android:icon="@mipmap/launcher_icon"
-34-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:10:9-45
+34-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:10:9-45
 35        android:label="InspectPro" >
-35-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:8:9-35
+35-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:8:9-35
 36        <activity
-36-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:11:9-31:20
+36-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:11:9-31:20
 37            android:name="com.example.processed.MainActivity"
-37-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:12:13-41
+37-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:12:13-41
 38            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-38-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:16:13-163
+38-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:16:13-163
 39            android:exported="true"
-39-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:13:13-36
+39-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:13:13-36
 40            android:hardwareAccelerated="true"
-40-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:17:13-47
+40-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:17:13-47
 41            android:launchMode="singleTop"
-41-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:14:13-43
+41-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:14:13-43
 42            android:theme="@style/LaunchTheme"
-42-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:15:13-47
+42-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:15:13-47
 43            android:windowSoftInputMode="adjustResize" >
-43-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:18:13-55
+43-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:18:13-55
 44
 45            <!--
 46                 Specifies an Android theme to apply to this Activity as soon as
@@ -84,21 +84,21 @@
 49                 to determine the Window background behind the Flutter UI.
 50            -->
 51            <meta-data
-51-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:23:13-26:17
+51-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:23:13-26:17
 52                android:name="io.flutter.embedding.android.NormalTheme"
-52-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:24:15-70
+52-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:24:15-70
 53                android:resource="@style/NormalTheme" />
-53-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:25:15-52
+53-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:25:15-52
 54
 55            <intent-filter>
-55-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:27:13-30:29
+55-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:27:13-30:29
 56                <action android:name="android.intent.action.MAIN" />
-56-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:28:17-68
-56-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:28:25-66
+56-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:28:17-68
+56-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:28:25-66
 57
 58                <category android:name="android.intent.category.LAUNCHER" />
-58-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:29:17-76
-58-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:29:27-74
+58-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:29:17-76
+58-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:29:27-74
 59            </intent-filter>
 60        </activity>
 61        <!--
@@ -106,87 +106,87 @@
 63             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
 64        -->
 65        <meta-data
-65-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:34:9-36:33
+65-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:34:9-36:33
 66            android:name="flutterEmbedding"
-66-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:35:13-44
+66-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:35:13-44
 67            android:value="2" />
-67-->/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/AndroidManifest.xml:36:13-30
+67-->/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/AndroidManifest.xml:36:13-30
 68
 69        <service
-69-->[:geolocator_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-14:56
+69-->[:geolocator_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-14:56
 70            android:name="com.baseflow.geolocator.GeolocatorLocationService"
-70-->[:geolocator_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-77
+70-->[:geolocator_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-77
 71            android:enabled="true"
-71-->[:geolocator_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-35
+71-->[:geolocator_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-35
 72            android:exported="false"
-72-->[:geolocator_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
+72-->[:geolocator_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
 73            android:foregroundServiceType="location" />
-73-->[:geolocator_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-53
+73-->[:geolocator_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/geolocator_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-53
 74
 75        <provider
-75-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-18:20
+75-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-18:20
 76            android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-76-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-82
+76-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-82
 77            android:authorities="com.inspectpro.processed.flutter.image_provider"
-77-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-74
+77-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-74
 78            android:exported="false"
-78-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
+78-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-37
 79            android:grantUriPermissions="true" >
-79-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-47
+79-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:14:13-47
 80            <meta-data
-80-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
+80-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
 81                android:name="android.support.FILE_PROVIDER_PATHS"
-81-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
+81-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
 82                android:resource="@xml/flutter_image_picker_file_paths" />
-82-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
+82-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
 83        </provider>
 84        <!--
 85           Declares a provider which allows us to store files to share in
 86           '.../caches/share_plus' and grant the receiving action access
 87        -->
 88        <provider
-88-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:15:9-23:20
+88-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:15:9-23:20
 89            android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
-89-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:16:13-77
+89-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:16:13-77
 90            android:authorities="com.inspectpro.processed.flutter.share_provider"
-90-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:17:13-74
+90-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:17:13-74
 91            android:exported="false"
-91-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:18:13-37
+91-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:18:13-37
 92            android:grantUriPermissions="true" >
-92-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:19:13-47
+92-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:19:13-47
 93            <meta-data
-93-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
+93-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:15:13-17:75
 94                android:name="android.support.FILE_PROVIDER_PATHS"
-94-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
+94-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:16:17-67
 95                android:resource="@xml/flutter_share_file_paths" />
-95-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
+95-->[:image_picker_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/image_picker_android/intermediates/merged_manifest/release/AndroidManifest.xml:17:17-72
 96        </provider>
 97        <!--
 98           This manifest declared broadcast receiver allows us to use an explicit
 99           Intent when creating a PendingItent to be informed of the user's choice
 100        -->
 101        <receiver
-101-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:28:9-34:20
+101-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:28:9-34:20
 102            android:name="dev.fluttercommunity.plus.share.SharePlusPendingIntent"
-102-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:29:13-82
+102-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:29:13-82
 103            android:exported="false" >
-103-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:30:13-37
+103-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:30:13-37
 104            <intent-filter>
-104-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:31:13-33:29
+104-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:31:13-33:29
 105                <action android:name="EXTRA_CHOSEN_COMPONENT" />
-105-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:32:17-65
-105-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:32:25-62
+105-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:32:17-65
+105-->[:share_plus] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/share_plus/intermediates/merged_manifest/release/AndroidManifest.xml:32:25-62
 106            </intent-filter>
 107        </receiver>
 108
 109        <activity
-109-->[:url_launcher_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-13:74
+109-->[:url_launcher_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:10:9-13:74
 110            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
-110-->[:url_launcher_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-74
+110-->[:url_launcher_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:11:13-74
 111            android:exported="false"
-111-->[:url_launcher_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-37
+111-->[:url_launcher_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:12:13-37
 112            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-112-->[:url_launcher_android] /Users/jaspreetsinghsodhi/Documents/processed/processed/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-71
+112-->[:url_launcher_android] /Users/jaspreetsinghsodhi/Documents/inspectpro/build/url_launcher_android/intermediates/merged_manifest/release/AndroidManifest.xml:13:13-71
 113        <activity
 113-->[com.google.android.gms:play-services-base:18.1.0] /Users/jaspreetsinghsodhi/.gradle/caches/transforms-3/028a675d0bc5463fd0b16375a1e80ebd/transformed/jetified-play-services-base-18.1.0/AndroidManifest.xml:20:9-22:45
 114            android:name="com.google.android.gms.common.api.GoogleApiActivity"

@@ -1391,7 +1391,7 @@
             "outputFile": "com.example.processed.app-merged_res-25:/values-night-v8_values-night-v8.arsc.flat",
             "map": [
                 {
-                    "source": "/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/res/values-night/styles.xml",
+                    "source": "/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/res/values-night/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
@@ -5085,7 +5085,7 @@
                     }
                 },
                 {
-                    "source": "/Users/jaspreetsinghsodhi/Documents/processed/processed/android/app/src/main/res/values/styles.xml",
+                    "source": "/Users/jaspreetsinghsodhi/Documents/inspectpro/android/app/src/main/res/values/styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",

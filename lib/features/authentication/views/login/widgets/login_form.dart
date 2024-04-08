@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:processed/features/authentication/controllers/login_controller.dart';
 import 'package:processed/features/authentication/views/resetpassword/screens/email_screen.dart';
-import 'package:processed/features/authentication/views/signup/screens/signup.dart';
+import 'package:processed/features/authentication/views/signup/screens/signup_screen.dart';
 import 'package:processed/utils/constants/sizes.dart';
 import 'package:processed/utils/constants/text_strings.dart';
 
@@ -69,7 +69,7 @@ class LoginForm extends StatelessWidget {
                     )),
                 const SizedBox(height: TSizes.inputFieldRadius),
                 GestureDetector(
-                  onTap: () => Get.to(ForgotEmail()),
+                  onTap: () => Get.to(const ForgotEmail()),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

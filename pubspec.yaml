@@ -50,6 +50,7 @@ dependencies:
   signature: ^5.4.1
   share_plus: ^7.2.2
   flutter_otp_text_field: ^1.1.2+1
+  flutter_pw_validator: ^1.6.0
 
   flutter:
     sdk: flutter

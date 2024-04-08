@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import 'package:processed/common/widgets/thank_you.dart';
+import 'package:processed/features/dashboard/views/home.dart';
 import 'package:processed/utils/helpers/helper_functions.dart';
 import 'package:processed/utils/http/http_client.dart';
 
 class SignUpController extends GetxController {
+  static RxString userApiKey = ''.obs;
+  static RxString userApiSecret = ''.obs;
+
   @override
   void onClose() {
     // clear all controllers
@@ -31,6 +36,9 @@ class SignUpController extends GetxController {
   final phoneController = TextEditingController();
   final companyController = TextEditingController();
   final genderController = TextEditingController();
+
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
@@ -71,110 +79,149 @@ class SignUpController extends GetxController {
     String designation = designationController.text;
     String phone = phoneController.text;
     String company = companyController.text;
-    String gender = genderController.text;
-
-    if (email.isEmpty ||
-        firstName.isEmpty ||
-        lastName.isEmpty ||
-        designation.isEmpty ||
-        phone.isEmpty ||
-        company.isEmpty) {
-      THelperFunctions.showSnackBar(
-          'Please fill all the details !', '', Colors.red);
-      return;
-    }
+    String confirmedPassword = confirmPasswordController.text;
 
     try {
-      final response = await THttpHelper.post('api/resource/Contact', {
-        'first_name': firstName,
-        'last_name': lastName,
-        'phone_nos': [
-          {
-            'phone': phone,
-          }
-        ],
-        'email_ids': [
-          {
-            'email_id': email,
-          }
-        ],
-        'gender': gender,
-        'designation': designation,
-        'company_name': company,
-        'full_name': '$firstName $lastName',
-      });
+      // setting up contact information
 
-      print(response.elementAt(0));
-      print(response.elementAt(1));
+      THttpHelper.setApiKeys(
+          THttpHelper.administratorApiKey, THttpHelper.administratorApiSecret);
 
-      if (response.elementAt(0) == 200) {
-        print(response.elementAt(1));
+      await createContact(
+          firstName, lastName, phone, email, designation, company);
+      await createBusiness(company);
+      await createUser(email, confirmedPassword, firstName);
+      await createUserPermissions(email, company);
+      await generateKeys(email);
 
-        Get.to(() => const ThankyouScreen(
-              title: 'Thank you for submitting your details',
-              message:
-                  'Your Details has been submitted successfully \n Our team will get back to you shortly ! ',
-            ));
-        // reset values
-        emailController.clear();
-        firstNameController.clear();
-        lastNameController.clear();
-        designationController.clear();
-        phoneController.clear();
-        companyController.clear();
-      } else {
-        // print()
-        THelperFunctions.showSnackBar(
-            'Oops!', 'There is something wrong !', Colors.red);
-      }
+      await getApiKey(email);
+
+      THttpHelper.setApiKeys(SignUpController.userApiKey.value,
+          SignUpController.userApiSecret.value);
+
+      // Get.to(const Home());
+
+      print('Current ApiSecret: ${SignUpController.userApiSecret.value}');
+      print('Current ApiKey: ${SignUpController.userApiKey.value}');
     } catch (e) {
-      // send to login screen again if mail is sent successfully
-      THelperFunctions.showSnackBar(
-          'Oops!', 'There is something wrong ! ${e.toString()}', Colors.green);
-      // Get.offAll(const LoginScreen());
+      print('Total Error' + e.toString());
     }
 
     // clear all the fields
   }
 }
 
+Future<void> createContact(String firstName, String lastName, String phone,
+    String email, String designation, String company) async {
+  try {
+    final response = await THttpHelper.post('api/resource/Contact', {
+      'first_name': firstName,
+      'last_name': lastName,
+      'phone_nos': [
+        {
+          'phone': phone,
+        }
+      ],
+      'email_ids': [
+        {
+          'email_id': email,
+        }
+      ],
+      'designation': designation,
+      'company_name': company,
+      'full_name': '$firstName $lastName',
+    });
 
+    if (response.elementAt(0) == 200) {
+      print('Contact Created Successfully !!!');
+      print(response.elementAt(1));
+    }
+  } catch (e) {
+    print('Error Creating Contact : $e');
+  }
+}
 
-// final Email sendEmail = Email(
-//       body: '''
+Future<void> createBusiness(String companyName) async {
+  try {
+    final response = await THttpHelper.post('api/resource/Business', {
+      'business_name': companyName,
+    });
 
-// Hi Team Processed,
+    if (response.elementAt(0) == 200) {
+      print('Business created successfully $response.elementAt(1)');
+    }
+  } catch (e) {
+    print('Error Creating Business: $e');
+  }
+}
 
-// I hope this email finds you well. I am reaching out to express my interest in setting up an account with Processed. Our company, ${companyController.text}, is keen on utilizing your services to streamline our operations.
+Future<void> createUser(
+    String email, String confirmedPassword, String firstName) async {
+  try {
+    final response = await THttpHelper.post('api/resource/User', {
+      'email': email,
+      'new_password': confirmedPassword,
+      "first_name": firstName,
+      "role_profile_name": "Quality Head"
+    });
 
-// Below are the details required for the account setup:
+    if (response.elementAt(0) == 200) {
+      print('User created successfully $response.elementAt(1)');
+    }
+  } catch (e) {
+    print('Error Creating User: $e');
+  }
+}
 
-// First Name: ${firstNameController.text}
-// Last Name: ${lastNameController.text}
-// Email: ${emailController.text}
-// Company Name: ${companyController.text}
-// Phone: ${phoneController.text}
+Future<void> createUserPermissions(String email, String companyName) async {
+  try {
+    print(email);
+    print(companyName);
+    final response = await THttpHelper.post('api/resource/User Permission',
+        {"user": "$email", "allow": "Business", "for_value": "$companyName"});
 
-// We believe that Processed's solutions align perfectly with our needs, and we are eager to begin leveraging your platform. Please let us know the next steps to proceed with the account setup process.
-// Looking forward to your prompt response and beginning this partnership.
+    if (response.elementAt(0) == 200) {
+      print('User Permissions created successfully $response.elementAt(1)');
+    }
+  } catch (e) {
+    print('Error Creating User Permissions: $e');
+  }
+}
 
-// Thank you for your attention to this matter.
+Future<void> generateKeys(String email) async {
+  try {
+    final response = await THttpHelper.post(
+        'api/method/frappe.core.doctype.user.user.generate_keys',
+        {"user": email.toString()});
 
-// Best regards,
-// ${firstNameController.text} ${lastNameController.text}
+    if (response.elementAt(0) == 200) {
+      print('Keys generated successfully');
+      print(response.elementAt(1)['message']['api_secret']);
 
+      SignUpController.userApiSecret.value =
+          response.elementAt(1)['message']['api_secret'];
+    }
+  } catch (e) {
+    print('Error Creating Keys: $e');
+  }
+}
 
-//   ''',
-//       subject: 'Account Setup Process with Prosessed.com',
-//       recipients: ['care@prosessed.com'],
-//       // cc: ['cc@example.com'],
-//       // attachmentPaths: ['/path/to/attachment.zip'],
-//       isHTML: false,
-//     );
+Future<String> getApiKey(String email) async {
+  try {
+    final response = await THttpHelper.get(
+        'api/resource/User?filters=[["name", "=" , "$email"]]&fields=["*"]');
 
-//     await FlutterEmailSender.send(sendEmail);
+    if (response.elementAt(0) == 200) {
+      final key = response.elementAt(1)['api_key'];
 
-//     // send to login screen again if mail is sent successfully
-//     THelperFunctions.showSnackBar(
-//         'Success', 'Mail Sent Successfully', Colors.green);
-//     Get.offAll(const LoginScreen());
+      print(key);
+      SignUpController.userApiKey.value = key;
+
+      return key;
+    }
+  } catch (e) {
+    print('Unable to fetch api key: $e');
+  }
+
+  return '';
+}

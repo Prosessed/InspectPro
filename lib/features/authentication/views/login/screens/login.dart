@@ -23,13 +23,13 @@ class LoginScreen extends StatelessWidget {
               children: [
                 LoginHeader(isDark: isDark),
                 const LoginForm(),
-                const DividerComponent(
-                  dividerText: TTexts.orSignInWith,
-                ),
-                const SizedBox(
-                  height: TSizes.spaceBtwSections,
-                ),
-                const SocialButtons()
+                // const DividerComponent(
+                //   dividerText: TTexts.orSignInWith,
+                // ),
+                // const SizedBox(
+                //   height: TSizes.spaceBtwSections,
+                // ),
+                // const SocialButtons()
               ],
             )),
       ),
