@@ -24,8 +24,37 @@ class AuthController extends GetxController {
     isPasswordVisible.value = !isPasswordVisible.value;
   }
 
+  Future<void> getApiKey(String email) async {
+    try {
+      THttpHelper.setApiKeys(
+          THttpHelper.administratorApiKey, THttpHelper.administratorApiSecret);
+      final response = await THttpHelper.get(
+          'api/resource/User?filters=[["name", "=" , "$email"]]&fields=["*"]');
+
+      if (response.elementAt(0) == 200) {
+        final api_key = response.elementAt(1)['data'][0]['api_key'];
+        final api_secret = response.elementAt(1)['data'][0]['api_secret'];
+
+        print('Api Key of logged in user is : $api_key ');
+        print('Api Secret of logged in user is : $api_secret ');
+
+        THttpHelper.setApiKeys(api_key, api_secret);
+      }
+    } catch (e) {
+      print('Unable to fetch api key: $e');
+    }
+  }
+
   void loginWithEmailAndPassword(String email, String password) async {
     //  post request to login user into erpnext portal
+
+    await getApiKey(email);
+
+    print(THttpHelper.apiKey);
+    print(email);
+
+    print(THttpHelper.apiSecret);
+    print(password);
 
     if (email.isEmpty || password.isEmpty) {
       THelperFunctions.showSnackBar(

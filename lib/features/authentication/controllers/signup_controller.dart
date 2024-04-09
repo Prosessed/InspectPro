@@ -91,10 +91,12 @@ class SignUpController extends GetxController {
           firstName, lastName, phone, email, designation, company);
       await createBusiness(company);
       await createUser(email, confirmedPassword, firstName);
-      await createUserPermissions(email, company);
       await generateKeys(email);
+      await createUserPermissions(email, company);
 
       await getApiKey(email);
+
+      await setPassword(email, confirmedPassword);
 
       THttpHelper.setApiKeys(SignUpController.userApiKey.value,
           SignUpController.userApiSecret.value);
@@ -108,6 +110,21 @@ class SignUpController extends GetxController {
     }
 
     // clear all the fields
+  }
+}
+
+Future<void> setPassword(String email, String confirmedPassword) async {
+  try {
+    final response = await THttpHelper.put(
+        'api/resource/User/$email', {"new_password": confirmedPassword});
+
+    if (response.elementAt(0) == 200) {
+      print(response.elementAt(1));
+
+      print('Password Created Successfully !!');
+    }
+  } catch (e) {
+    print('Error Creating password: $e');
   }
 }
 
@@ -135,6 +152,7 @@ Future<void> createContact(String firstName, String lastName, String phone,
     if (response.elementAt(0) == 200) {
       print('Contact Created Successfully !!!');
       print(response.elementAt(1));
+      print('\n\n\n');
     }
   } catch (e) {
     print('Error Creating Contact : $e');
@@ -149,6 +167,7 @@ Future<void> createBusiness(String companyName) async {
 
     if (response.elementAt(0) == 200) {
       print('Business created successfully $response.elementAt(1)');
+      print('\n\n\n');
     }
   } catch (e) {
     print('Error Creating Business: $e');
@@ -167,6 +186,7 @@ Future<void> createUser(
 
     if (response.elementAt(0) == 200) {
       print('User created successfully $response.elementAt(1)');
+      print('\n\n\n');
     }
   } catch (e) {
     print('Error Creating User: $e');
@@ -182,6 +202,7 @@ Future<void> createUserPermissions(String email, String companyName) async {
 
     if (response.elementAt(0) == 200) {
       print('User Permissions created successfully $response.elementAt(1)');
+      print('\n\n\n');
     }
   } catch (e) {
     print('Error Creating User Permissions: $e');
@@ -198,6 +219,8 @@ Future<void> generateKeys(String email) async {
       print('Keys generated successfully');
       print(response.elementAt(1)['message']['api_secret']);
 
+      print('\n\n\n');
+
       SignUpController.userApiSecret.value =
           response.elementAt(1)['message']['api_secret'];
     }
@@ -206,22 +229,20 @@ Future<void> generateKeys(String email) async {
   }
 }
 
-Future<String> getApiKey(String email) async {
+Future<void> getApiKey(String email) async {
   try {
     final response = await THttpHelper.get(
         'api/resource/User?filters=[["name", "=" , "$email"]]&fields=["*"]');
 
     if (response.elementAt(0) == 200) {
-      final key = response.elementAt(1)['api_key'];
+      final key = response.elementAt(1)['data'][0]['api_key'];
 
       print(key);
-      SignUpController.userApiKey.value = key;
+      print('\n\n\n');
 
-      return key;
+      SignUpController.userApiKey.value = key;
     }
   } catch (e) {
     print('Unable to fetch api key: $e');
   }
-
-  return '';
 }
