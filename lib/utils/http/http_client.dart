@@ -50,7 +50,10 @@ class THttpHelper {
   static Future<Set> put(String endpoint, dynamic data) async {
     final response = await http.put(
       Uri.parse('$_baseUrl/$endpoint'),
-      headers: {'Content-Type': 'application/json'},
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'token $apiKey:$apiSecret'
+      },
       body: json.encode(data),
     );
     return _handleResponse(response);

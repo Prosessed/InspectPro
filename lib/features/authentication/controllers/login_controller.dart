@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -56,12 +57,6 @@ class AuthController extends GetxController {
     print(THttpHelper.apiSecret);
     print(password);
 
-    if (email.isEmpty || password.isEmpty) {
-      THelperFunctions.showSnackBar(
-          'Email or Password cannot be empty', '', Colors.red);
-      return;
-    }
-
     try {
       Set response = await THttpHelper.post('api/method/login', {
         'usr': email,
@@ -89,8 +84,12 @@ class AuthController extends GetxController {
           GetStorage().write('isLoggedIn', true);
         }
 
-        THelperFunctions.showSnackBar('Successfully Logged In ',
-            'Welcome ${GetStorage().read('user_name')}', Colors.green);
+        THelperFunctions.showSnackBar(
+          'Hey $storedUserName,',
+          'Welcome ${GetStorage().read('user_name')}',
+          Get.context!,
+          ContentType.success,
+        );
 
         Get.to(
           () => const NavigationMenu(),
@@ -98,7 +97,11 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       THelperFunctions.showSnackBar(
-          'Invalid Credentials or User does not exist !', '', Colors.red);
+        'Oops!',
+        'Invalid Credentials or User does not exist!',
+        Get.context!,
+        ContentType.failure,
+      );
     }
   }
 
@@ -114,8 +117,12 @@ class AuthController extends GetxController {
       if (response.elementAt(1).length == 0) {
         print(response.elementAt(1));
 
-        THelperFunctions.showSnackBar('Successfully Logged Out ',
-            'You have been logged out successfully', Colors.green);
+        THelperFunctions.showSnackBar(
+          'Successfully Logged Out ',
+          'You have been logged out successfully',
+          Get.context!,
+          ContentType.success,
+        );
 
         emailController.clear();
         passwordController.clear();
@@ -129,7 +136,8 @@ class AuthController extends GetxController {
     } catch (e) {
       //  show error message
 
-      THelperFunctions.showSnackBar('Error', 'An error occured', Colors.red);
+      THelperFunctions.showSnackBar(
+          'Error', 'An error occured', Get.context!, ContentType.failure);
     }
   }
 }

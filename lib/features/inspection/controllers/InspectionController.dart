@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
@@ -257,8 +258,11 @@ class InspectionController extends GetxController {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
         //stuff
-        THelperFunctions.showSnackBar('Location Services Disabled',
-            'Please enable location services to continue', Colors.red);
+        THelperFunctions.showSnackBar(
+            'Location Services Disabled',
+            'Please enable location services to continue',
+            Get.context!,
+            ContentType.failure);
 
         Get.to(() => const NavigationMenu());
       }
@@ -267,8 +271,11 @@ class InspectionController extends GetxController {
       permission = await Geolocator.checkPermission();
 
       Get.to(() => const NavigationMenu());
-      THelperFunctions.showSnackBar('Location Services Disabled',
-          'Please enable location services to continue', Colors.red);
+      THelperFunctions.showSnackBar(
+          'Location Services Disabled',
+          'Please enable location services to continue',
+          Get.context!,
+          ContentType.failure);
     }
     myLocation = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
@@ -347,7 +354,11 @@ class InspectionController extends GetxController {
       }
     } catch (e) {
       THelperFunctions.showSnackBar(
-          '', 'Please select an Template to continue', Colors.red);
+        '',
+        'Please select an Template to continue',
+        Get.context!,
+        ContentType.failure,
+      );
     }
   }
 
@@ -615,12 +626,18 @@ class InspectionController extends GetxController {
             ));
       } else {
         THelperFunctions.showSnackBar(
-            'Oops!', 'Failed to Create Inspection Try Again !', Colors.red);
+            'Oops!',
+            'Failed to Create Inspection Try Again !',
+            Get.context!,
+            ContentType.failure);
         Get.off(() => const NavigationMenu());
       }
     } catch (e) {
       THelperFunctions.showSnackBar(
-          'Oops!', 'Failed to Create Inspection Try Again !', Colors.red);
+          'Oops!',
+          'Failed to Create Inspection Try Again !',
+          Get.context!,
+          ContentType.failure);
       Get.off(() => const NavigationMenu());
       print(e.toString());
     }
@@ -632,8 +649,8 @@ class InspectionController extends GetxController {
         referenceTypeValue.value == 'Select Reference Type*' ||
         documentNameController.text == '' ||
         inspectionTemplateValue.value == 'Select Inspection Template*') {
-      THelperFunctions.showSnackBar(
-          'Please fill all the mandatory fields', '', Colors.red);
+      THelperFunctions.showSnackBar('Please fill all the mandatory fields', '',
+          Get.context!, ContentType.failure);
       return;
     }
 

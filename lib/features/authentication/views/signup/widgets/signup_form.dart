@@ -3,119 +3,164 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:processed/features/authentication/controllers/signup_controller.dart';
-import 'package:processed/features/authentication/views/resetpassword/screens/crate_new_password.dart';
-import 'package:processed/features/authentication/views/signup/screens/create_user.dart';
+import 'package:processed/features/authentication/views/signup/screens/crate_new_password.dart';
 import 'package:processed/utils/constants/sizes.dart';
 import 'package:processed/utils/constants/text_strings.dart';
 import 'package:processed/utils/helpers/helper_functions.dart';
+import 'package:processed/utils/validators/validators.dart';
 
 class SignUpForm extends StatelessWidget {
-  const SignUpForm({
+  SignUpForm({
     super.key,
   });
+
+  SignUpController signUpController = Get.put(SignUpController());
 
   @override
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
+
+    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
     return Form(
+      key: _formKey,
       child: Column(
         children: [
           Row(
             children: [
               Expanded(
-                child: TextFormField(
+                child: CustomTextField(
                   controller: SignUpController.instance.firstNameController,
-                  expands: false,
-                  decoration: InputDecoration(
-                      labelText: TTexts.firstName,
-                      labelStyle: TextStyle(fontSize: 12.sp),
-                      prefixIcon: const Icon(Iconsax.user)),
+                  labelText: TTexts.firstName,
+                  prefixIcon: Iconsax.user,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Enter a valid first name';
+                    }
+                  },
                 ),
               ),
               const SizedBox(width: TSizes.spaceBtwInputFields),
               Expanded(
-                child: TextFormField(
+                child: CustomTextField(
                   controller: SignUpController.instance.lastNameController,
-                  expands: false,
-                  decoration: InputDecoration(
-                      labelText: TTexts.lastName,
-                      labelStyle: TextStyle(fontSize: 12.sp),
-                      prefixIcon: const Icon(Iconsax.user)),
+                  labelText: TTexts.lastName,
+                  prefixIcon: Iconsax.user,
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Enter a valid last name';
+                    }
+                  },
                 ),
               ),
             ],
           ),
-          const SizedBox(
-            height: TSizes.spaceBtwInputFields,
-          ),
-          TextFormField(
+          const SizedBox(height: TSizes.spaceBtwInputFields),
+          CustomTextField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Please enter your designation';
+              }
+            },
             controller: SignUpController.instance.designationController,
-            decoration: InputDecoration(
-                labelText: TTexts.designation,
-                labelStyle: TextStyle(fontSize: 12.sp),
-                prefixIcon: const Icon(Iconsax.user_edit)),
+            labelText: TTexts.designation,
+            prefixIcon: Iconsax.user_edit,
           ),
-          // const SizedBox(
-          //   height: TSizes.spaceBtwInputFields,
-          // ),
-          // TextFormField(
-          //   controller: SignUpController.instance.genderController,
-          //   decoration: InputDecoration(
-          //     labelText: TTexts.gender,
-          //     prefixIcon: const Icon(Iconsax.user_edit),
-          //     labelStyle: TextStyle(fontSize: 12.sp),
-          //   ),
-          // ),
-          const SizedBox(
-            height: TSizes.spaceBtwInputFields,
-          ),
-          TextFormField(
-            validator: SignUpController.instance.validateEmail,
+          const SizedBox(height: TSizes.spaceBtwInputFields),
+          CustomTextField(
             controller: SignUpController.instance.emailController,
-            decoration: InputDecoration(
-                labelStyle: TextStyle(fontSize: 12.sp),
-                labelText: TTexts.email,
-                prefixIcon: const Icon(Iconsax.calendar)),
+            labelText: TTexts.email,
+            prefixIcon: Iconsax.calendar,
+            keyboardType: TextInputType.emailAddress,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Please enter your email';
+              }
+              if (!AppValidations.isValidEmail(value)) {
+                return 'Please enter a valid email';
+              }
+            },
           ),
-          const SizedBox(
-            height: TSizes.spaceBtwInputFields,
-          ),
-          TextFormField(
-            keyboardType: TextInputType.phone,
-            validator: SignUpController.instance.validatePhoneNumber,
+          const SizedBox(height: TSizes.spaceBtwInputFields),
+          CustomTextField(
             controller: SignUpController.instance.phoneController,
-            decoration: InputDecoration(
-                labelStyle: TextStyle(fontSize: 12.sp),
-                labelText: TTexts.phoneNo,
-                prefixIcon: const Icon(Iconsax.mobile)),
+            labelText: TTexts.phoneNo,
+            prefixIcon: Iconsax.mobile,
+            keyboardType: TextInputType.phone,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Please enter your phone number';
+              }
+              if (!AppValidations.isValidPhoneNumber(value)) {
+                return 'Please enter a valid phone number';
+              }
+            },
           ),
-          const SizedBox(
-            height: TSizes.spaceBtwInputFields,
-          ),
-
-          TextFormField(
+          const SizedBox(height: TSizes.spaceBtwInputFields),
+          CustomTextField(
+            validator: (value) {
+              if (value!.isEmpty) {
+                return 'Please enter your company name';
+              }
+            },
             controller: SignUpController.instance.companyController,
-            decoration: InputDecoration(
-                labelStyle: TextStyle(fontSize: 12.sp),
-                labelText: TTexts.companyName,
-                prefixIcon: const Icon(Iconsax.building)),
+            labelText: TTexts.companyName,
+            prefixIcon: Iconsax.building,
           ),
-          const SizedBox(
-            height: TSizes.spaceBtwSections,
-          ),
+          const SizedBox(height: TSizes.spaceBtwSections),
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-                onPressed: () {
-                  // SignUpController.instance.signUp();
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
                   Get.to(() => CreateNewPassword());
-                },
-                child: Text(
-                  TTexts.next,
-                  style: Theme.of(context).textTheme.headlineSmall,
-                )),
+                }
+              },
+              child: Text(
+                TTexts.next,
+                style: Theme.of(context).textTheme.headlineSmall,
+              ),
+            ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CustomTextField extends StatelessWidget {
+  final TextEditingController controller;
+  final String labelText;
+  final IconData prefixIcon;
+  final TextInputType? keyboardType;
+  final FormFieldValidator<String>? validator;
+
+  const CustomTextField({
+    Key? key,
+    required this.controller,
+    required this.labelText,
+    required this.prefixIcon,
+    this.keyboardType,
+    this.validator,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      keyboardType: keyboardType,
+      validator: validator,
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: labelText,
+        // focusedErrorBorder: InputBorder.none,
+        // errorBorder: InputBorder.none,
+        errorStyle: TextStyle(
+          fontSize: 10.sp,
+        ),
+        errorMaxLines: 1,
+        labelStyle: TextStyle(fontSize: 12.sp),
+        prefixIcon: Icon(prefixIcon),
       ),
     );
   }

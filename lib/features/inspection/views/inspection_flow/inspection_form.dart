@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -441,7 +442,8 @@ class InspectionForm extends StatelessWidget {
                                     ? THelperFunctions.showSnackBar(
                                         'Please select all Mandatory Details to Continue!',
                                         '',
-                                        Colors.red)
+                                        context,
+                                        ContentType.failure)
                                     : Get.to(() => const InspectionPartOne())
                                 : inspectionController
                                             .inspectionTemplateValue.value ==
@@ -449,7 +451,8 @@ class InspectionForm extends StatelessWidget {
                                     ? THelperFunctions.showSnackBar(
                                         '',
                                         'Please select all Mandatory Details to Continue!',
-                                        Colors.red)
+                                        context,
+                                        ContentType.failure)
                                     : Get.to(() => const InspectionPartOne()),
                           )),
               ],

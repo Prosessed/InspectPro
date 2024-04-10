@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -74,8 +75,8 @@ class InspectionPartThree extends StatelessWidget {
                   hintText: 'Submit Inspection',
                   onPressed: () {
                     if (InspectionController.instance.signature.value.isEmpty) {
-                      THelperFunctions.showSnackBar(
-                          'Please upload signature', '', Colors.red);
+                      THelperFunctions.showSnackBar('Please upload signature',
+                          '', context, ContentType.failure);
                       return;
                     } else {
                       InspectionController.instance.createInspectionForm();

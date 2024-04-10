@@ -37,6 +37,9 @@ class SignUpScreen extends StatelessWidget {
           ),
         ),
       ),
+
+      // t6729468@gmail.com
+
       body: SingleChildScrollView(
         child: Container(
           // margin: const EdgeInsets.symmetric(vertical: TSizes.defaultSpace),
@@ -52,7 +55,7 @@ class SignUpScreen extends StatelessWidget {
                 const SizedBox(
                   height: TSizes.spaceBtwSections,
                 ),
-                const SignUpForm(),
+                SignUpForm(),
               ],
             ),
           ),

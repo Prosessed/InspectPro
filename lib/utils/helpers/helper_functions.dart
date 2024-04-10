@@ -1,16 +1,30 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:processed/utils/constants/sizes.dart';
 
 class THelperFunctions {
-  static void showSnackBar(String? message, String? desc, Color color) {
-    Get.snackbar(
-      maxWidth: 300.w,
-      message!,
-      desc!,
-      backgroundColor: color,
-    );
+  static void showSnackBar(String? message, String? desc, BuildContext context,
+      ContentType contentType) {
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        duration: const Duration(seconds: 2),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        // behavior: SnackBarBehavior.floating,
+        content: Padding(
+          padding: EdgeInsets.only(top: 10.h),
+          child: AwesomeSnackbarContent(
+            title: message!,
+            message: desc!,
+
+            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
+            contentType: contentType,
+            // to configure for material banner
+            // inMaterialBanner: true,
+          ),
+        )));
   }
 
   static bool isDarkMode(BuildContext context) {

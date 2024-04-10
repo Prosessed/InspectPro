@@ -1,14 +1,19 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:processed/common/widgets/thank_you.dart';
 import 'package:processed/features/dashboard/views/home.dart';
+import 'package:processed/navigation_menu.dart';
 import 'package:processed/utils/helpers/helper_functions.dart';
 import 'package:processed/utils/http/http_client.dart';
+import 'package:processed/utils/validators/validators.dart';
 
 class SignUpController extends GetxController {
   static RxString userApiKey = ''.obs;
   static RxString userApiSecret = ''.obs;
+  RxBool isLoading = false.obs;
 
   @override
   void onClose() {
@@ -40,38 +45,8 @@ class SignUpController extends GetxController {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Email is required.';
-    }
-
-    // Regular expression for email validation
-    final emailRegExp = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-
-    if (!emailRegExp.hasMatch(value)) {
-      return 'Invalid email address.';
-    }
-
-    return null;
-  }
-
-  String? validatePhoneNumber(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Phone number is required.';
-    }
-
-    // Regular expression for phone number validation
-    final phoneRegExp =
-        RegExp(r'^[0-9]{10}$'); // Assuming 10-digit phone number
-
-    if (!phoneRegExp.hasMatch(value)) {
-      return 'Invalid phone number.';
-    }
-
-    return null;
-  }
-
   void signUp() async {
+    // isLoading.value = true;
     // check validations
     String email = emailController.text;
     String firstName = firstNameController.text;
@@ -96,10 +71,16 @@ class SignUpController extends GetxController {
 
       await getApiKey(email);
 
-      await setPassword(email, confirmedPassword);
+      // await setPassword(email, confirmedPassword);
 
       THttpHelper.setApiKeys(SignUpController.userApiKey.value,
           SignUpController.userApiSecret.value);
+
+      // isLoading.value = false;
+
+      await signInWithEmailPassword(email, confirmedPassword);
+
+      // Get.to(NavigationMenu());
 
       // Get.to(const Home());
 
@@ -110,6 +91,57 @@ class SignUpController extends GetxController {
     }
 
     // clear all the fields
+  }
+}
+
+Future<void> signInWithEmailPassword(String email, String password) async {
+  try {
+    print('Signing in with email $email');
+    print(' with password $password');
+    print('Api key using is - ${THttpHelper.apiKey}');
+    print('Api secret using is - ${THttpHelper.apiSecret}');
+    Set response = await THttpHelper.post('api/method/login', {
+      'usr': email,
+      'pwd': password,
+    });
+
+    if (response.elementAt(0) == 200) {
+      print(response.elementAt(1));
+
+      final String userName = response.elementAt(1)['full_name'];
+
+      print(userName);
+      print(email);
+
+      final String storedUserName = GetStorage().read(
+            'user_name',
+          ) ??
+          '';
+      final String storedUserEmail = GetStorage().read('user_email') ?? '';
+
+      if (storedUserEmail != email || storedUserName != userName) {
+        // Update values if they differ
+        GetStorage().write('user_name', userName);
+        GetStorage().write('user_email', email);
+        GetStorage().write('isLoggedIn', true);
+      }
+
+      THelperFunctions.showSnackBar(
+          'Successfully Logged In ',
+          'Welcome ${GetStorage().read('user_name')}',
+          Get.context!,
+          ContentType.failure);
+
+      Get.to(
+        () => const NavigationMenu(),
+      );
+    }
+  } catch (e) {
+    THelperFunctions.showSnackBar(
+        'Invalid Credentials or User does not exist !',
+        '',
+        Get.context!,
+        ContentType.failure);
   }
 }
 
@@ -181,7 +213,8 @@ Future<void> createUser(
       'email': email,
       'new_password': confirmedPassword,
       "first_name": firstName,
-      "role_profile_name": "Quality Head"
+      "role_profile_name": "Quality Head",
+      "new_password": confirmedPassword,
     });
 
     if (response.elementAt(0) == 200) {

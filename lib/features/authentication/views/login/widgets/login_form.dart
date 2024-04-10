@@ -1,3 +1,4 @@
+import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +9,9 @@ import 'package:processed/features/authentication/views/resetpassword/screens/em
 import 'package:processed/features/authentication/views/signup/screens/signup_screen.dart';
 import 'package:processed/utils/constants/sizes.dart';
 import 'package:processed/utils/constants/text_strings.dart';
+import 'package:processed/utils/helpers/helper_functions.dart';
+import 'package:processed/utils/http/http_client.dart';
+import 'package:processed/utils/validators/validators.dart';
 
 class LoginForm extends StatelessWidget {
   const LoginForm({
@@ -17,96 +21,114 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthController authController = Get.put(AuthController());
-    GlobalKey<FormState> form = GlobalKey<FormState>();
+    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-    return Form(
-        key: form,
-        child: Padding(
-          padding:
-              const EdgeInsets.symmetric(vertical: TSizes.spaceBtwSections),
-          child: Form(
-            child: Column(
-              children: [
-                TextFormField(
-                  validator: (value) {
-                    if (value!.isEmpty ||
-                        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                            .hasMatch(value)) {
-                      return 'Enter a valid email!';
-                    }
-                    return null;
-                  },
-                  controller: authController.emailController,
-                  decoration: InputDecoration(
-                      labelStyle: TextStyle(fontSize: 12.sp),
-                      prefixIcon: const Icon(Iconsax.direct_right),
-                      labelText: TTexts.email),
-                ),
-                const SizedBox(
-                  height: TSizes.spaceBtwInputFields,
-                ),
-                Obx(() => TextFormField(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          Form(
+              key: _formKey,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    vertical: TSizes.spaceBtwSections),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
                       validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Enter a valid password!';
+                        if (value!.isEmpty ||
+                            !AppValidations.isValidEmail(value)) {
+                          return 'Please enter a valid email address';
                         }
-                        return null;
                       },
-                      obscureText: authController.isPasswordVisible.value,
-                      controller: authController.passwordController,
+                      controller: authController.emailController,
                       decoration: InputDecoration(
+                          errorStyle: TextStyle(
+                            fontSize: 10.sp,
+                          ),
                           labelStyle: TextStyle(fontSize: 12.sp),
-                          prefixIcon: const Icon(Iconsax.password_check4),
-                          suffixIcon: GestureDetector(
-                              onTap: () =>
-                                  authController.togglePasswordVisibility(),
-                              child: Icon(
-                                authController.isPasswordVisible.value
-                                    ? Iconsax.eye_slash
-                                    : Iconsax.eye,
-                              )),
-                          labelText: TTexts.password),
-                    )),
-                const SizedBox(height: TSizes.inputFieldRadius),
-                GestureDetector(
-                  onTap: () => Get.to(const ForgotEmail()),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        'Forgot Password',
-                        style: Theme.of(context).textTheme.labelSmall,
-                      )
-                    ],
-                  ),
+                          prefixIcon: const Icon(Iconsax.direct_right),
+                          labelText: TTexts.email),
+                    ),
+                    const SizedBox(
+                      height: TSizes.spaceBtwInputFields,
+                    ),
+                    Obx(() => TextFormField(
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Please enter a valid password';
+                            }
+                            return null;
+                          },
+                          obscureText: authController.isPasswordVisible.value,
+                          controller: authController.passwordController,
+                          decoration: InputDecoration(
+                              errorStyle: TextStyle(
+                                fontSize: 10.sp,
+                              ),
+                              labelStyle: TextStyle(fontSize: 12.sp),
+                              prefixIcon: const Icon(Iconsax.password_check4),
+                              suffixIcon: GestureDetector(
+                                  onTap: () =>
+                                      authController.togglePasswordVisibility(),
+                                  child: Icon(
+                                    authController.isPasswordVisible.value
+                                        ? Iconsax.eye_slash
+                                        : Iconsax.eye,
+                                  )),
+                              labelText: TTexts.password),
+                        )),
+                    const SizedBox(height: TSizes.inputFieldRadius),
+                    GestureDetector(
+                      onTap: () => Get.to(ForgotEmail()),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            'Forgot Password ?',
+                            style: Theme.of(context).textTheme.labelSmall,
+                          )
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: TSizes.spaceBtwInputFields),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            authController.loginWithEmailAndPassword(
+                                authController.emailController.text,
+                                authController.passwordController.text);
+                          } else {
+                            THelperFunctions.showSnackBar(
+                                'Oops!',
+                                'Email or Password cannot be empty',
+                                Get.context!,
+                                ContentType.failure);
+                          }
+                        },
+                        child: const Text(TTexts.signIn),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: TSizes.spaceBtwItems,
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      child: OutlinedButton(
+                        onPressed: () {
+                          Get.to(() => const SignUpScreen());
+                        },
+                        child: const Text(TTexts.createAccount),
+                      ),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: TSizes.spaceBtwInputFields),
-                SizedBox(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      authController.loginWithEmailAndPassword(
-                          authController.emailController.text,
-                          authController.passwordController.text);
-                    },
-                    child: const Text(TTexts.signIn),
-                  ),
-                ),
-                const SizedBox(
-                  height: TSizes.spaceBtwItems,
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: OutlinedButton(
-                    onPressed: () {
-                      Get.to(() => const SignUpScreen());
-                    },
-                    child: const Text(TTexts.createAccount),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ));
+              )),
+        ],
+      ),
+    );
   }
 }
