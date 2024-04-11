@@ -8,12 +8,15 @@ import 'package:processed/features/authentication/views/signup/screens/crate_new
 import 'package:processed/utils/constants/colors.dart';
 import 'package:processed/utils/constants/sizes.dart';
 import 'package:processed/utils/helpers/helper_functions.dart';
+import 'package:processed/utils/validators/validators.dart';
 
 class ForgotEmail extends StatelessWidget {
   ForgotEmail({super.key});
 
   ResetPasswordController resetPasswordController =
       Get.put(ResetPasswordController());
+
+  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -38,68 +41,86 @@ class ForgotEmail extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(TSizes.defaultSpace),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(TSizes.defaultSpace),
-              child: Column(
-                children: [
-                  Center(
-                    child: Text(
-                      'Forgot Password',
-                      style: Theme.of(context).textTheme.headlineLarge,
-                    ),
-                  ),
-                  Center(
-                    child: Container(
-                      padding: EdgeInsets.only(top: 5.h),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(TSizes.defaultSpace),
+                child: Column(
+                  children: [
+                    Center(
                       child: Text(
-                        'Recover your account password',
-                        style: Theme.of(context).textTheme.labelMedium,
+                        'Forgot Password',
+                        style: Theme.of(context).textTheme.headlineLarge,
                       ),
                     ),
+                    Center(
+                      child: Container(
+                        padding: EdgeInsets.only(top: 5.h),
+                        child: Text(
+                          'Recover your account password',
+                          style: Theme.of(context).textTheme.labelMedium,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: TSizes.spaceBtwSections,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Email*',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  const SizedBox(
+                    height: TSizes.spaceBtwInputFields,
+                  ),
+                  TextFormField(
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      if (!AppValidations.isValidEmail(value)) {
+                        return 'Please enter a valid email';
+                      }
+                    },
+                    controller: resetPasswordController.resetPasswordEmail,
+                    decoration: InputDecoration(
+                        errorStyle: TextStyle(
+                          fontSize: 10.sp,
+                        ),
+                        errorMaxLines: 1,
+                        labelStyle: TextStyle(fontSize: 12.sp),
+                        hintText: 'Enter your Email Address',
+                        hintStyle: Theme.of(context).textTheme.labelMedium,
+                        prefixIcon: const Icon(Iconsax.direct_right),
+                        labelText: 'Enter your Email Address'),
                   ),
                 ],
               ),
-            ),
-            const SizedBox(
-              height: TSizes.spaceBtwSections,
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Email*',
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                const SizedBox(
-                  height: TSizes.spaceBtwInputFields,
-                ),
-                TextFormField(
-                  controller: resetPasswordController.resetPasswordEmail,
-                  decoration: InputDecoration(
-                      hintText: 'Enter your Email Address',
-                      hintStyle: Theme.of(context).textTheme.labelMedium,
-                      labelStyle: TextStyle(fontSize: 12.sp),
-                      prefixIcon: const Icon(Iconsax.direct_right),
-                      labelText: 'Enter your Email Address'),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: TSizes.spaceBtwSections,
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: () {
-                  Get.to(() => ResetPassword());
-                },
-                child: const Text('Next'),
+              const SizedBox(
+                height: TSizes.spaceBtwSections,
               ),
-            ),
-          ],
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      Get.to(() => ResetPassword());
+                    }
+                  },
+                  child: const Text('Next'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

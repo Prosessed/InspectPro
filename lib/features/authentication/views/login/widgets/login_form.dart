@@ -103,10 +103,10 @@ class LoginForm extends StatelessWidget {
                                 authController.passwordController.text);
                           } else {
                             THelperFunctions.showSnackBar(
-                                'Oops!',
-                                'Email or Password cannot be empty',
+                                'Congratulations!',
+                                'Logged In Successfully',
                                 Get.context!,
-                                ContentType.failure);
+                                ContentType.success);
                           }
                         },
                         child: const Text(TTexts.signIn),
