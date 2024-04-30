@@ -1,4 +1,3 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -103,11 +102,13 @@ class LoginForm extends StatelessWidget {
                                 authController.passwordController.text);
                           } else {
                             THelperFunctions.showSnackBar(
-                                'Congratulations!',
-                                'Logged In Successfully',
+                                'Please fill all the mandatory details',
                                 Get.context!,
-                                ContentType.success);
+                                false);
                           }
+
+                          // authController.emailController.dispose();
+                          // authController.passwordController.dispose();
                         },
                         child: const Text(TTexts.signIn),
                       ),

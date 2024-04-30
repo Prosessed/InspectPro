@@ -27,6 +27,16 @@ void main() async {
     print('isLoggedIn changed: $value');
   });
 
+  box.listenKey('apikey', (value) {
+    // Handle login status changes here
+    print('apikey changed: $value');
+  });
+
+  box.listenKey('apisecret', (value) {
+    // Handle login status changes here
+    print('apisecret changed: $value');
+  });
+
   runApp(const MyApp());
 }
 

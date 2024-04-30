@@ -168,6 +168,7 @@ class ResetPassword extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     // signUpController.signUp();
+                    resetPasswordController.resetPassword();
                   },
                   child: const Text('Reset Password'),
                 ),

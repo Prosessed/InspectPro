@@ -88,7 +88,7 @@ class Home extends StatelessWidget {
                         fontSize: 16.sp),
                   ),
                   TextSpan(
-                    text: GetStorage().read('user_name'),
+                    text: GetStorage().read('full_name'),
                     style: TextStyle(
                         color: isDark ? TColors.white : TColors.black,
                         fontSize: 16.sp,

@@ -1,28 +1,33 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:processed/utils/constants/sizes.dart';
 
 class THelperFunctions {
-  static void showSnackBar(String? message, String? desc, BuildContext context,
-      ContentType contentType) {
+  static void showSnackBar(String? desc, BuildContext context, bool isSuccess) {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         duration: const Duration(seconds: 2),
         backgroundColor: Colors.transparent,
         elevation: 0,
         // behavior: SnackBarBehavior.floating,
-        content: Padding(
-          padding: EdgeInsets.only(top: 10.h),
-          child: AwesomeSnackbarContent(
-            title: message!,
-            message: desc!,
+        content: Container(
+          decoration: BoxDecoration(
+              color: isSuccess ? Colors.green : Colors.red,
+              borderRadius: BorderRadius.circular(20.sp)),
 
-            /// change contentType to ContentType.success, ContentType.warning or ContentType.help for variants
-            contentType: contentType,
-            // to configure for material banner
-            // inMaterialBanner: true,
+          width: 80.w, // Set your desired fixed width
+          height: 50.h, // Set your desired small height
+          child: Center(
+            child: FittedBox(
+              child: Text(
+                desc!,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 14.sp,
+                ),
+              ),
+            ),
           ),
         )));
   }

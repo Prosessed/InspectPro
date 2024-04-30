@@ -1,4 +1,3 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -434,25 +433,23 @@ class InspectionForm extends StatelessWidget {
                                         inspectionController
                                                 .referenceTypeValue.value ==
                                             'Select Reference Type*' ||
-                                        inspectionController
-                                                .documentNameController.text ==
+                                        inspectionController.documentNameController
+                                                .text ==
                                             '' ||
                                         inspectionController
                                             .reportDateController.text.isEmpty
                                     ? THelperFunctions.showSnackBar(
-                                        'Please select all Mandatory Details to Continue!',
-                                        '',
+                                        'Please fill all the Mandatory Details!',
                                         context,
-                                        ContentType.failure)
+                                        false)
                                     : Get.to(() => const InspectionPartOne())
                                 : inspectionController
                                             .inspectionTemplateValue.value ==
                                         'Select Inspection Template*'
                                     ? THelperFunctions.showSnackBar(
-                                        '',
-                                        'Please select all Mandatory Details to Continue!',
+                                        'Please fill all the Mandatory Details!',
                                         context,
-                                        ContentType.failure)
+                                        false)
                                     : Get.to(() => const InspectionPartOne()),
                           )),
               ],

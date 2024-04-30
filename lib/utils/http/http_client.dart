@@ -15,20 +15,21 @@ class THttpHelper {
   static String get baseUrl => _baseUrl;
 
   static String _apiKey = '';
+  static String _apiSecret = '';
 
   set apiKeys(value) => _apiKey = value;
-
-  static String _apiSecret = '';
 
   static void setApiKeys(String apiKey, String apiSecret) {
     _apiKey = apiKey;
     _apiSecret = apiSecret;
+    print('Api key for logged In User: $_apiKey');
+    print('Api secret for logged In User: $_apiSecret');
   }
 
   // Helper method to make a GET request
   static Future<Set> get(String endpoint) async {
     final response = await http.get(Uri.parse('$_baseUrl/$endpoint'), headers: {
-      'authorization': 'token $apiKey:$apiSecret',
+      'authorization': 'token $_apiKey:$_apiSecret',
     });
     return _handleResponse(response);
   }
@@ -39,7 +40,7 @@ class THttpHelper {
       Uri.parse('$_baseUrl/$endpoint'),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'token $apiKey:$apiSecret'
+        'Authorization': 'token $_apiKey:$_apiSecret'
       },
       body: json.encode(data),
     );
@@ -52,7 +53,7 @@ class THttpHelper {
       Uri.parse('$_baseUrl/$endpoint'),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'token $apiKey:$apiSecret'
+        'Authorization': 'token $_apiKey:$_apiSecret'
       },
       body: json.encode(data),
     );

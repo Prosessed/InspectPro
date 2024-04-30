@@ -1,4 +1,3 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_connect/http/src/utils/utils.dart';
@@ -127,10 +126,7 @@ Future<void> signInWithEmailPassword(String email, String password) async {
       }
 
       THelperFunctions.showSnackBar(
-          'Successfully Logged In ',
-          'Welcome ${GetStorage().read('user_name')}',
-          Get.context!,
-          ContentType.failure);
+          'Welcome ${GetStorage().read('user_name')}', Get.context!, true);
 
       Get.to(
         () => const NavigationMenu(),
@@ -138,10 +134,7 @@ Future<void> signInWithEmailPassword(String email, String password) async {
     }
   } catch (e) {
     THelperFunctions.showSnackBar(
-        'Invalid Credentials or User does not exist !',
-        '',
-        Get.context!,
-        ContentType.failure);
+        'Invalid Credentials or User does not exist !', Get.context!, false);
   }
 }
 

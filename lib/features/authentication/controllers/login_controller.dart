@@ -1,8 +1,12 @@
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/response/response.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
 import 'package:processed/features/authentication/views/login/screens/login.dart';
+import 'package:processed/features/dashboard/views/home.dart';
 import 'package:processed/navigation_menu.dart';
 import 'package:processed/utils/helpers/helper_functions.dart';
 import 'package:processed/utils/http/http_client.dart';
@@ -47,63 +51,126 @@ class AuthController extends GetxController {
   }
 
   void loginWithEmailAndPassword(String email, String password) async {
-    //  post request to login user into erpnext portal
-
-    await getApiKey(email);
-
-    print(THttpHelper.apiKey);
-    print(email);
-
-    print(THttpHelper.apiSecret);
-    print(password);
-
     try {
-      Set response = await THttpHelper.post('api/method/login', {
+      // Define the URL for the POST request
+      Uri url =
+          Uri.parse('https://app.prosessed.com/api/method/prosessed.api.login');
+
+      // Prepare the data to be sent in the POST request
+      Map<String, dynamic> postData = {
         'usr': email,
         'pwd': password,
-      });
+      };
 
-      if (response.elementAt(0) == 200) {
-        print(response.elementAt(1));
+      // Convert the data to JSON format
+      String jsonData = jsonEncode(postData);
 
-        final String userName = response.elementAt(1)['full_name'];
+      // Make the POST request
+      var response = await http.post(
+        url,
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+        body: jsonData,
+      );
 
-        print(userName);
-        print(email);
+      // Check the status code of the response
+      if (response.statusCode == 200) {
+        // Successful response
+        print('Data posted successfully.');
+        print('Response body: ${response.body}');
 
-        final String storedUserName = GetStorage().read(
-              'user_name',
-            ) ??
-            '';
-        final String storedUserEmail = GetStorage().read('user_email') ?? '';
+        Map<String, dynamic> responseData = jsonDecode(response.body);
 
-        if (storedUserEmail != email || storedUserName != userName) {
-          // Update values if they differ
-          GetStorage().write('user_name', userName);
-          GetStorage().write('user_email', email);
-          GetStorage().write('isLoggedIn', true);
-        }
+        String apiKey = responseData['message']['api_key'];
+        String apiSecret = responseData['message']['api_secret'];
+        String username = responseData['message']['username'];
+        String email = responseData['message']['email'];
+
+        print('API Key: $apiKey');
+        print('API Secret: $apiSecret');
+        print('Username: $username');
+        print('Email: $email');
+
+        GetStorage().write('apikey', apiKey);
+        GetStorage().write('apisecret', apiSecret);
+        GetStorage().write('full_name', username);
+        GetStorage().write('user_email', email);
+        GetStorage().write('isLoggedIn', true);
+
+        THttpHelper.setApiKeys(apiKey, apiSecret);
 
         THelperFunctions.showSnackBar(
-          'Hey $storedUserName,',
-          'Welcome ${GetStorage().read('user_name')}',
-          Get.context!,
-          ContentType.success,
-        );
+            'Welcome ${GetStorage().read('full_name')}', Get.context!, true);
 
         Get.to(
           () => const NavigationMenu(),
         );
+      } else {
+        // Handle other status codes (e.g., 404, 500)
+        print('Error posting data. Status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
       }
     } catch (e) {
-      THelperFunctions.showSnackBar(
-        'Oops!',
-        'Invalid Credentials or User does not exist!',
-        Get.context!,
-        ContentType.failure,
-      );
+      // Handle any exceptions that may occur during the request
+      print('Error making POST request: $e');
     }
   }
+
+  // void loginWithEmailAndPassword(String email, String password) async {
+  //   //  post request to login user into erpnext portal
+
+  //   await getApiKey(email);
+
+  //   print(THttpHelper.apiKey);
+  //   print(email);
+
+  //   print(THttpHelper.apiSecret);
+  //   print(password);
+
+  //   try {
+  //     Set response = await THttpHelper.post('api/method/prosessed.api.login', {
+  //       'usr': email,
+  //       'pwd': password,
+  //     });
+
+  //     if (response.elementAt(0) == 200) {
+  //       print(response.elementAt(1));
+
+  //       final String userName = response.elementAt(1)['full_name'];
+
+  //       print(userName);
+  //       print(email);
+
+  //       final String storedUserName = GetStorage().read(
+  //             'user_name',
+  //           ) ??
+  //           '';
+  //       final String storedUserEmail = GetStorage().read('user_email') ?? '';
+
+  //       if (storedUserEmail != email || storedUserName != userName) {
+  //         // Update values if they differ
+  //         GetStorage().write('user_name', userName);
+  //         GetStorage().write('user_email', email);
+  //         GetStorage().write('isLoggedIn', true);
+  //       }
+
+  //       THelperFunctions.showSnackBar(
+  //         'Welcome ${GetStorage().read('user_name')}',
+  //         Get.context!,
+  //       );
+
+  //       Get.to(
+  //         () => const NavigationMenu(),
+  //       );
+  //     }
+  //   } catch (e) {
+  //     THelperFunctions.showSnackBar(
+  //       'Invalid Credentials or User does not exist!',
+  //       Get.context!,
+  //     );
+  //   }
+  // }
 
   void logout() async {
     //  post request to logout user from erpnext portal
@@ -118,11 +185,7 @@ class AuthController extends GetxController {
         print(response.elementAt(1));
 
         THelperFunctions.showSnackBar(
-          'Successfully Logged Out ',
-          'You have been logged out successfully',
-          Get.context!,
-          ContentType.success,
-        );
+            'You have been logged out successfully', Get.context!, true);
 
         emailController.clear();
         passwordController.clear();
@@ -135,9 +198,6 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       //  show error message
-
-      THelperFunctions.showSnackBar(
-          'Error', 'An error occured', Get.context!, ContentType.failure);
     }
   }
 }
