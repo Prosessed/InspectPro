@@ -11,8 +11,6 @@ class AppValidations {
     // Regular expression to match a valid phone number
     RegExp phoneRegExp = RegExp(r'^\+?[1-9]\d{1,14}$');
 
-    // Check if the phone number matches the regular expression
-
     return phoneRegExp.hasMatch(phoneNumber);
   }
 }

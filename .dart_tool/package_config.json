@@ -374,6 +374,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "intl_phone_field",
+      "rootUri": "file:///Users/jaspreetsinghsodhi/.pub-cache/hosted/pub.dev/intl_phone_field-3.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "js",
       "rootUri": "file:///Users/jaspreetsinghsodhi/.pub-cache/hosted/pub.dev/js-0.7.1",
       "packageUri": "lib/",
@@ -782,7 +788,7 @@
       "languageVersion": "3.2"
     }
   ],
-  "generated": "2024-05-03T05:11:44.998834Z",
+  "generated": "2024-05-03T07:28:38.607835Z",
   "generator": "pub",
   "generatorVersion": "3.3.0"
 }

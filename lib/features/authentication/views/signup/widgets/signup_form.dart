@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:processed/features/authentication/controllers/signup_controller.dart';
 import 'package:processed/features/authentication/views/signup/screens/crate_new_password.dart';
 import 'package:processed/utils/constants/sizes.dart';
@@ -86,22 +88,21 @@ class SignUpForm extends StatelessWidget {
             },
           ),
           const SizedBox(height: TSizes.spaceBtwInputFields),
-          CustomTextField(
-            controller: SignUpController.instance.phoneController,
-            labelText: TTexts.phoneNo,
-            prefixIcon: Iconsax.mobile,
-            keyboardType: TextInputType.phone,
-            validator: (value) {
-              if (value!.isEmpty) {
-                return 'Please enter your phone number';
-              }
-              if (!AppValidations.isValidPhoneNumber(value)) {
-                return 'Please enter a valid phone number';
-              }
-              return null;
+          IntlPhoneField(
+            controller: signUpController.phoneController,
+            decoration: const InputDecoration(
+                labelText: 'Phone number*',
+                labelStyle: TextStyle(fontSize: 12.0),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(),
+                ),
+                errorStyle: TextStyle(fontSize: 12.0)),
+            initialCountryCode: 'AU',
+            onChanged: (phone) {
+              // print(phone.completeNumber);
             },
           ),
-          const SizedBox(height: TSizes.spaceBtwInputFields),
+          const SizedBox(height: TSizes.sm),
           CustomTextField(
             validator: (value) {
               if (value!.isEmpty) {
