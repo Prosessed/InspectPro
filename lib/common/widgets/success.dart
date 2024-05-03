@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:processed/utils/constants/colors.dart';
-import 'package:processed/utils/constants/image_strings.dart';
 import 'package:processed/utils/constants/sizes.dart';
 import 'package:processed/utils/helpers/helper_functions.dart';
 
 class SuccessAlertDialog extends StatelessWidget {
-  SuccessAlertDialog({Key? key}) : super(key: key);
+  const SuccessAlertDialog({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,9 +16,9 @@ class SuccessAlertDialog extends StatelessWidget {
       content: Container(
         width: 250.w,
         height: 300.h,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           // border: Border.all(color: TColors.white),s
-          borderRadius: const BorderRadius.all(
+          borderRadius: BorderRadius.all(
             Radius.circular(TSizes.borderRadiusLg + 4),
           ),
         ),

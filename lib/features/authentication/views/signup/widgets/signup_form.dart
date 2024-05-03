@@ -20,10 +20,10 @@ class SignUpForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final isDark = THelperFunctions.isDarkMode(context);
 
-    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     return Form(
-      key: _formKey,
+      key: formKey,
       child: Column(
         children: [
           Row(
@@ -37,6 +37,7 @@ class SignUpForm extends StatelessWidget {
                     if (value!.isEmpty) {
                       return 'Enter a valid first name';
                     }
+                    return null;
                   },
                 ),
               ),
@@ -50,6 +51,7 @@ class SignUpForm extends StatelessWidget {
                     if (value!.isEmpty) {
                       return 'Enter a valid last name';
                     }
+                    return null;
                   },
                 ),
               ),
@@ -61,6 +63,7 @@ class SignUpForm extends StatelessWidget {
               if (value!.isEmpty) {
                 return 'Please enter your designation';
               }
+              return null;
             },
             controller: SignUpController.instance.designationController,
             labelText: TTexts.designation,
@@ -79,6 +82,7 @@ class SignUpForm extends StatelessWidget {
               if (!AppValidations.isValidEmail(value)) {
                 return 'Please enter a valid email';
               }
+              return null;
             },
           ),
           const SizedBox(height: TSizes.spaceBtwInputFields),
@@ -94,6 +98,7 @@ class SignUpForm extends StatelessWidget {
               if (!AppValidations.isValidPhoneNumber(value)) {
                 return 'Please enter a valid phone number';
               }
+              return null;
             },
           ),
           const SizedBox(height: TSizes.spaceBtwInputFields),
@@ -102,6 +107,7 @@ class SignUpForm extends StatelessWidget {
               if (value!.isEmpty) {
                 return 'Please enter your company name';
               }
+              return null;
             },
             controller: SignUpController.instance.companyController,
             labelText: TTexts.companyName,
@@ -112,8 +118,11 @@ class SignUpForm extends StatelessWidget {
             width: double.infinity,
             child: ElevatedButton(
               onPressed: () {
-                if (_formKey.currentState!.validate()) {
+                if (formKey.currentState!.validate()) {
                   Get.to(() => CreateNewPassword());
+                } else {
+                  THelperFunctions.showSnackBar(
+                      'Please fill all valid details', context, false);
                 }
               },
               child: Text(
@@ -136,13 +145,13 @@ class CustomTextField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
 
   const CustomTextField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.labelText,
     required this.prefixIcon,
     this.keyboardType,
     this.validator,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

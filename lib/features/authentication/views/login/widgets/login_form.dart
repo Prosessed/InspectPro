@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -9,7 +8,6 @@ import 'package:processed/features/authentication/views/signup/screens/signup_sc
 import 'package:processed/utils/constants/sizes.dart';
 import 'package:processed/utils/constants/text_strings.dart';
 import 'package:processed/utils/helpers/helper_functions.dart';
-import 'package:processed/utils/http/http_client.dart';
 import 'package:processed/utils/validators/validators.dart';
 
 class LoginForm extends StatelessWidget {
@@ -20,13 +18,13 @@ class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AuthController authController = Get.put(AuthController());
-    GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     return SingleChildScrollView(
       child: Column(
         children: [
           Form(
-              key: _formKey,
+              key: formKey,
               child: Padding(
                 padding: const EdgeInsets.symmetric(
                     vertical: TSizes.spaceBtwSections),
@@ -39,6 +37,7 @@ class LoginForm extends StatelessWidget {
                             !AppValidations.isValidEmail(value)) {
                           return 'Please enter a valid email address';
                         }
+                        return null;
                       },
                       controller: authController.emailController,
                       decoration: InputDecoration(
@@ -96,7 +95,7 @@ class LoginForm extends StatelessWidget {
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          if (_formKey.currentState!.validate()) {
+                          if (formKey.currentState!.validate()) {
                             authController.loginWithEmailAndPassword(
                                 authController.emailController.text,
                                 authController.passwordController.text);

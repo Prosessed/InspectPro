@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:processed/features/authentication/views/resetpassword/controllers/reset_password_controller.dart';
 import 'package:processed/features/authentication/views/resetpassword/screens/reset_password.dart';
-import 'package:processed/features/authentication/views/signup/screens/crate_new_password.dart';
 import 'package:processed/utils/constants/colors.dart';
 import 'package:processed/utils/constants/sizes.dart';
 import 'package:processed/utils/helpers/helper_functions.dart';
@@ -16,7 +15,7 @@ class ForgotEmail extends StatelessWidget {
   ResetPasswordController resetPasswordController =
       Get.put(ResetPasswordController());
 
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -90,6 +89,7 @@ class ForgotEmail extends StatelessWidget {
                       if (!AppValidations.isValidEmail(value)) {
                         return 'Please enter a valid email';
                       }
+                      return null;
                     },
                     controller: resetPasswordController.resetPasswordEmail,
                     decoration: InputDecoration(
@@ -113,6 +113,7 @@ class ForgotEmail extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
+                      resetPasswordController.resetPassword();
                       Get.to(() => ResetPassword());
                     }
                   },

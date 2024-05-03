@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:get/get_instance/get_instance.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:processed/features/authentication/controllers/signup_controller.dart';
 import 'package:processed/features/authentication/views/signup/widgets/signup_form.dart';

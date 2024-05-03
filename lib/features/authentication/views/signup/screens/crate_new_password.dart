@@ -3,7 +3,6 @@ import 'package:flutter_pw_validator/flutter_pw_validator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:processed/common/widgets/success.dart';
 import 'package:processed/features/authentication/controllers/signup_controller.dart';
 import 'package:processed/utils/constants/colors.dart';
 import 'package:processed/utils/constants/sizes.dart';
@@ -76,41 +75,46 @@ class CreateNewPassword extends StatelessWidget {
                   const SizedBox(
                     height: TSizes.spaceBtwInputFields,
                   ),
-                  TextFormField(
-                    // obscureText: authController.isPasswordVisible.value,
-                    controller: signUpController.passwordController,
-                    decoration: InputDecoration(
-                        labelStyle: Theme.of(context).textTheme.labelMedium,
-                        prefixIcon: const Icon(Iconsax.password_check4),
-                        // suffixIcon: GestureDetector(
-                        //     onTap: () =>
-                        //         authController.togglePasswordVisibility(),
-                        //     child: Icon(
-                        //       authController.isPasswordVisible.value
-                        //           ? Iconsax.eye_slash
-                        //           : Iconsax.eye,
-                        //     )),
-                        labelText: 'Enter new password'),
+                  Obx(
+                    () => TextFormField(
+                      obscureText: signUpController.isPasswordVisible.value,
+                      controller: signUpController.passwordController,
+                      decoration: InputDecoration(
+                          labelStyle: Theme.of(context).textTheme.labelMedium,
+                          prefixIcon: const Icon(Iconsax.password_check4),
+                          suffixIcon: GestureDetector(
+                              onTap: () =>
+                                  signUpController.togglePasswordVisibility(),
+                              child: Icon(
+                                signUpController.isPasswordVisible.value
+                                    ? Iconsax.eye_slash
+                                    : Iconsax.eye,
+                              )),
+                          labelText: 'Enter new password'),
+                    ),
                   ),
                   const SizedBox(
                     height: TSizes.spaceBtwInputFields,
                   ),
-                  SizedBox(
-                    height: 150.h,
-                    child: FlutterPwValidator(
-                      controller: signUpController.passwordController,
-                      minLength: 6,
-                      uppercaseCharCount: 1,
-                      lowercaseCharCount: 2,
-                      numericCharCount: 3,
-                      specialCharCount: 1,
-                      width: 300.w,
-                      height: 100.h,
-                      onSuccess: () => {},
-                      onFail: () => {},
-                    ),
-                  )
                 ],
+              ),
+              const SizedBox(
+                height: TSizes.spaceBtwInputFields,
+              ),
+              SizedBox(
+                height: 150.h,
+                child: FlutterPwValidator(
+                  controller: signUpController.passwordController,
+                  minLength: 6,
+                  uppercaseCharCount: 1,
+                  lowercaseCharCount: 2,
+                  numericCharCount: 3,
+                  specialCharCount: 1,
+                  width: 300.w,
+                  height: 100.h,
+                  onSuccess: () => {},
+                  onFail: () => {},
+                ),
               ),
               const SizedBox(
                 height: TSizes.spaceBtwSections,
@@ -125,40 +129,41 @@ class CreateNewPassword extends StatelessWidget {
                   const SizedBox(
                     height: TSizes.spaceBtwInputFields,
                   ),
-                  TextFormField(
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return 'Enter a valid password!';
-                      }
-                      return null;
-                    },
-                    // obscureText: authController.isPasswordVisible.value,
-                    // controller: authController.passwordController,
-                    decoration: InputDecoration(
-                        labelStyle: Theme.of(context).textTheme.labelMedium,
-                        prefixIcon: const Icon(Iconsax.password_check4),
-                        // suffixIcon: GestureDetector(
-                        //     onTap: () =>
-                        //         // authController.togglePasswordVisibility(),
-                        //     child: Icon(
-                        //       authController.isPasswordVisible.value
-                        //           ? Iconsax.eye_slash
-                        //           : Iconsax.eye,
-                        //     )),
-                        labelText: 'Confirm your password'),
+                  Obx(
+                    () => TextFormField(
+                      obscureText:
+                          signUpController.isConfirmPasswordVisible.value,
+                      controller: signUpController.confirmPasswordController,
+                      decoration: InputDecoration(
+                          labelStyle: Theme.of(context).textTheme.labelMedium,
+                          prefixIcon: const Icon(Iconsax.password_check4),
+                          suffixIcon: GestureDetector(
+                              onTap: () =>
+                                  signUpController.togglePasswordVisibility(),
+                              child: Icon(
+                                signUpController.isConfirmPasswordVisible.value
+                                    ? Iconsax.eye_slash
+                                    : Iconsax.eye,
+                              )),
+                          labelText: 'Enter Confirm password'),
+                    ),
                   ),
                 ],
               ),
               const SizedBox(
                 height: TSizes.spaceBtwSections,
               ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    signUpController.signUp();
-                  },
-                  child: const Text('Create Account'),
+              Obx(
+                () => SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      signUpController.signUp();
+                    },
+                    child: signUpController.isLoading.value
+                        ? const CircularProgressIndicator()
+                        : const Text('Create Account'),
+                  ),
                 ),
               ),
             ],

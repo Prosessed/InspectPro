@@ -6,7 +6,7 @@ class THttpHelper {
 
   static const String administratorApiKey = 'bbc7b66bb984d4a';
 
-  static const String administratorApiSecret = 'd7d3f56bb43f5c3';
+  static const String administratorApiSecret = '94bba531063025e';
 
   //  jaspreet -> static const String _apiSecret = 'f7c47f9ece18028';
 
@@ -53,7 +53,7 @@ class THttpHelper {
       Uri.parse('$_baseUrl/$endpoint'),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'token $_apiKey:$_apiSecret'
+        'Authorization': 'token $administratorApiKey:$administratorApiSecret'
       },
       body: json.encode(data),
     );

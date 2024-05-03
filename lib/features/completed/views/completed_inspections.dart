@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:processed/common/widgets/pdf_screen.dart';
 import 'package:processed/features/completed/controllers/completed_controller.dart';
 import 'package:processed/features/dashboard/controllers/homecontroller.dart';
@@ -26,26 +27,45 @@ class CompletedInspectionsScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(TSizes.defaultSpace),
-        child: Obx(() => ListView.builder(
-              itemBuilder: (context, index) {
-                // Accessing attributes using appropriate methods or properties
-                var completedInspection = controller.all[index];
+        child: Obx(() => controller.all.isEmpty
+            ? Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Iconsax.empty_wallet,
+                      size: 50.sp,
+                      color: TColors.primary,
+                    ),
+                    const SizedBox(height: TSizes.defaultSpace),
+                    Text(
+                      'No Completed Inspections',
+                      style: Theme.of(context).textTheme.headlineSmall,
+                    ),
+                  ],
+                ),
+              )
+            : ListView.builder(
+                itemBuilder: (context, index) {
+                  // Accessing attributes using appropriate methods or properties
+                  var completedInspection = controller.all[index];
 
-                return CompletedItem(
-                    title: completedInspection.inspectionTemplateName == ''
-                        ? completedInspection.completedItemName!.toString()
-                        : completedInspection.inspectionTemplateName.toString(),
-                    reportDate:
-                        completedInspection.reportDateCompleted!.toString(),
-                    // id: completedInspection.completedId!.toString(),
+                  return CompletedItem(
+                      title: completedInspection.inspectionTemplateName == ''
+                          ? completedInspection.completedItemName!.toString()
+                          : completedInspection.inspectionTemplateName
+                              .toString(),
+                      reportDate:
+                          completedInspection.reportDateCompleted!.toString(),
+                      // id: completedInspection.completedId!.toString(),
 
-                    subTitle: completedInspection.companyName!,
-                    reportLink: completedInspection.inspectionName,
-                    //   'https://app.prosessed.com/printview?doctype=Inspection%20Form&name=${completedInspection.inspectionName!}&format=Inspection%20Report%20Format',
-                    completedId: (index + 1).toString());
-              },
-              itemCount: controller.all.length,
-            )),
+                      subTitle: completedInspection.companyName!,
+                      reportLink: completedInspection.inspectionName,
+                      //   'https://app.prosessed.com/printview?doctype=Inspection%20Form&name=${completedInspection.inspectionName!}&format=Inspection%20Report%20Format',
+                      completedId: (index + 1).toString());
+                },
+                itemCount: controller.all.length,
+              )),
       ),
     );
   }

@@ -37,8 +37,8 @@ class TTexts {
   static const String phoneNo = "Mobile Number*";
   static const String rememberMe = "Remember Me";
   static const String forgetPassword = "Forget Password?";
-  static const String signIn = "Sign In";
-  static const String createAccount = "Get Started";
+  static const String signIn = "Log In";
+  static const String createAccount = "Register";
   static const String createUserAccount = "Create Account";
   static const String orSignInWith = "or sign in with";
   static const String sendAnEmail = "Send Email";
