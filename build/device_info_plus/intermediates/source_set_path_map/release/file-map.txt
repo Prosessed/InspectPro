@@ -1,0 +1,12 @@
+dev.fluttercommunity.plus.device_info.device_info_plus-jetified-annotation-experimental-1.1.0-0 /Users/jaspreetsinghsodhi/.gradle/caches/transforms-3/09db32a73384ac2dccccf916d7dc0262/transformed/jetified-annotation-experimental-1.1.0/res
+dev.fluttercommunity.plus.device_info.device_info_plus-core-1.6.0-1 /Users/jaspreetsinghsodhi/.gradle/caches/transforms-3/168e459aae59caaab0d2c703cf9d67ab/transformed/core-1.6.0/res
+dev.fluttercommunity.plus.device_info.device_info_plus-jetified-window-1.0.0-beta04-2 /Users/jaspreetsinghsodhi/.gradle/caches/transforms-3/29fe38a5fd6c3bf46cd8e59c2b63489e/transformed/jetified-window-1.0.0-beta04/res
+dev.fluttercommunity.plus.device_info.device_info_plus-jetified-window-java-1.0.0-beta04-3 /Users/jaspreetsinghsodhi/.gradle/caches/transforms-3/978180320ed1d29d66a82edc9d24751e/transformed/jetified-window-java-1.0.0-beta04/res
+dev.fluttercommunity.plus.device_info.device_info_plus-main-4 /Users/jaspreetsinghsodhi/.pub-cache/hosted/pub.dev/device_info_plus-9.1.2/android/src/main/res
+dev.fluttercommunity.plus.device_info.device_info_plus-release-5 /Users/jaspreetsinghsodhi/.pub-cache/hosted/pub.dev/device_info_plus-9.1.2/android/src/release/res
+dev.fluttercommunity.plus.device_info.device_info_plus-pngs-6 /Users/jaspreetsinghsodhi/Documents/inspectpro/build/device_info_plus/generated/res/pngs/release
+dev.fluttercommunity.plus.device_info.device_info_plus-resValues-7 /Users/jaspreetsinghsodhi/Documents/inspectpro/build/device_info_plus/generated/res/resValues/release
+dev.fluttercommunity.plus.device_info.device_info_plus-rs-8 /Users/jaspreetsinghsodhi/Documents/inspectpro/build/device_info_plus/generated/res/rs/release
+dev.fluttercommunity.plus.device_info.device_info_plus-mergeReleaseResources-9 /Users/jaspreetsinghsodhi/Documents/inspectpro/build/device_info_plus/intermediates/incremental/release/mergeReleaseResources/merged.dir
+dev.fluttercommunity.plus.device_info.device_info_plus-mergeReleaseResources-10 /Users/jaspreetsinghsodhi/Documents/inspectpro/build/device_info_plus/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+dev.fluttercommunity.plus.device_info.device_info_plus-merged_res-11 /Users/jaspreetsinghsodhi/Documents/inspectpro/build/device_info_plus/intermediates/merged_res/release

@@ -97,14 +97,33 @@ class AuthController extends GetxController {
   void logout() async {
     //  post request to logout user from erpnext portal
 
-    try {
-      Set response = await THttpHelper.post('api/method/logout', {
-        'usr': emailController.text,
-        'pwd': passwordController.text,
-      });
+    Uri url = Uri.parse('https://app.prosessed.com/api/method/logout');
 
-      if (response.elementAt(1).length == 0) {
-        print(response.elementAt(1));
+    // Prepare the data to be sent in the POST request
+    Map<String, dynamic> logoutData = {
+      'usr': emailController.text,
+      'pwd': passwordController.text,
+    };
+
+    // Convert the data to JSON format
+    String jsonData = jsonEncode(logoutData);
+
+    // Make the POST request
+    var response = await http.post(
+      url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonData,
+    );
+
+    try {
+      if (response.statusCode == 200) {
+        // Successful response
+        print('Login  successfully.');
+        print('Response body: ${response.body}');
+
+        Map<String, dynamic> responseData = jsonDecode(response.body);
 
         THelperFunctions.showSnackBar(
             'You have been logged out successfully', Get.context!, true);
@@ -117,9 +136,14 @@ class AuthController extends GetxController {
         Get.off(() => const LoginScreen());
 
         update();
+      } else {
+        // Handle other status codes (e.g., 404, 500)
+        print('Error posting data. Status code: ${response.statusCode}');
+        print('Response body: ${response.body}');
       }
     } catch (e) {
-      //  show error message
+      print(e.toString());
+      ;
     }
   }
 }

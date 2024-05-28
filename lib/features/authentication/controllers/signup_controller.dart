@@ -7,7 +7,7 @@ import 'package:processed/utils/http/http_client.dart';
 import 'package:http/http.dart' as http;
 
 class SignUpController extends GetxController {
-  RxBool isLoading = true.obs;
+  RxBool isLoading = false.obs;
   RxBool isPasswordVisible = false.obs;
   RxBool isConfirmPasswordVisible = false.obs;
 
@@ -76,6 +76,9 @@ class SignUpController extends GetxController {
       isLoading.value = false;
 
       Get.to(() => const LoginScreen());
+
+      THelperFunctions.showSnackBar(
+          'Account created successfully!', Get.context!, true);
     } catch (e) {
       print('Total Error$e');
     }

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:get_storage/get_storage.dart';
 import 'package:http/http.dart' as http;
 
 class THttpHelper {
@@ -29,7 +30,7 @@ class THttpHelper {
   // Helper method to make a GET request
   static Future<Set> get(String endpoint) async {
     final response = await http.get(Uri.parse('$_baseUrl/$endpoint'), headers: {
-      'authorization': 'token $_apiKey:$_apiSecret',
+      'authorization': 'token $administratorApiKey :$administratorApiSecret',
     });
     return _handleResponse(response);
   }
@@ -40,7 +41,7 @@ class THttpHelper {
       Uri.parse('$_baseUrl/$endpoint'),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'token $_apiKey:$_apiSecret'
+        'Authorization': 'token $administratorApiKey :$administratorApiSecret'
       },
       body: json.encode(data),
     );

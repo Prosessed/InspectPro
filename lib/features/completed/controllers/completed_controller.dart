@@ -1,11 +1,12 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:processed/features/completed/models/completed_inspection_model.dart';
-import 'package:processed/utils/http/http_client.dart';
 import 'package:processed/utils/local_storage/db_helper.dart';
+import 'package:http/http.dart' as http;
 
 class CompletedController extends GetxController {
   // RxBool isLoading = true.obs;
@@ -19,16 +20,24 @@ class CompletedController extends GetxController {
 
   getFileContent(String inspectionName) async {
     try {
-      final response =
-          await THttpHelper.post('api/method/get_inspection_form_pdf', {
-        'docname': inspectionName,
-      });
+      final fileResponse = await http.post(
+          Uri.parse(
+              'https://app.prosessed.com/api/method/get_inspection_form_pdf'),
+          headers: {
+            'authorization':
+                'token ${GetStorage().read('apikey')}:${GetStorage().read('apisecret')}',
+          },
+          body: {
+            'docname': inspectionName,
+          });
 
-      if (response.elementAt(0) == 200) {
-        print(response.elementAt(1)['message']['filecontent']);
+      if (fileResponse.statusCode == 200) {
+        final responseBody = jsonDecode(fileResponse.body);
+
+        print(responseBody['message']['filecontent']);
 
         List<int> intList =
-            (response.elementAt(1)['message']['filecontent'] as List<dynamic>)
+            (responseBody['message']['filecontent'] as List<dynamic>)
                 .map<int>((element) => element as int)
                 .toList();
 

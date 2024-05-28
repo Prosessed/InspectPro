@@ -94,11 +94,29 @@ class HomeController extends GetxController {
 
   void getPendingTasks() async {
     print(GetStorage().read('user_email'));
-    var res = await THttpHelper.get(
-        'api/resource/Planner?fields=["*"]&filters=[["owner","=","${GetStorage().read('user_email').toString()}"]]');
 
-    allPendingTasks.value = res.elementAt(1)['data'];
-    update();
+    final response = await http.get(
+        Uri.parse(
+            'https://app.prosessed.com/api/resource/Planner?fields=["*"]&filters=[["owner","=","${GetStorage().read('user_email').toString()}"]]'),
+        headers: {
+          'authorization':
+              'token ${GetStorage().read('apikey')}:${GetStorage().read('apisecret')}',
+        });
+
+    if (response.statusCode == 200) {
+      // Parse the JSON response body
+      final responseBody = jsonDecode(response.body);
+
+      // Check if the response body contains the 'data' field
+      if (responseBody.containsKey('data')) {
+        // Assign the 'data' to allPendingTasks
+        allPendingTasks.value = responseBody['data'];
+      } else {
+        print('No data found in response');
+      }
+    } else {
+      print('Failed to load pending tasks');
+    }
 
     print(allPendingTasks.length);
 
@@ -186,15 +204,21 @@ class HomeController extends GetxController {
 
   Future<List> getAllCompletedInspections() async {
     try {
-      final response = await THttpHelper.get(
-          'api/resource/Inspection Form?fields=["*"]&filters=[["inspected_by","=","${GetStorage().read('user_email').toString()}"], ["docstatus" , "=", "1"] ]');
+      final response = await http.get(
+          Uri.parse(
+              'https://app.prosessed.com/api/resource/Inspection Form?fields=["*"]&filters=[["inspected_by","=","${GetStorage().read('user_email').toString()}"], ["docstatus" , "=", "1"] ]'),
+          headers: {
+            'authorization':
+                'token ${GetStorage().read('apikey')}:${GetStorage().read('apisecret')}',
+          });
 
-      if (response.elementAt(0) == 200) {
+      if (response.statusCode == 200) {
         // print(response.elementAt(1)['data']);
-        allCompletedInspections.value = response.elementAt(1)['data'];
+        final responseBody = jsonDecode(response.body);
 
-        print(allCompletedInspections.length);
+        allCompletedInspections.value = responseBody['data'];
 
+        print('Successfully fetched all completed inspections');
         return allCompletedInspections;
       }
     } catch (e) {
@@ -226,19 +250,14 @@ class HomeController extends GetxController {
       }, Uri.parse(endPoint));
 
       if (response.statusCode == 200) {
-        print('Referene names data for $referenceType is -  ${response.body}');
-
         List<dynamic> dataList = json.decode(response.body)["data"];
 
         List<String> nameList =
             dataList.map((map) => map['name'].toString()).toList();
 
+        print('All References data for $referenceType is - ${response.body}');
+
         referenceNames.value = nameList;
-
-        print('Reference Type Selected - \n$referenceType');
-
-        print(
-            'All Reference Names for $referenceType fetched\n  - \n$referenceNames');
       }
     } catch (e) {
       print(e);
@@ -251,11 +270,18 @@ class HomeController extends GetxController {
 
   Future<void> createItemTemplateMapping() async {
     try {
-      final response = await THttpHelper.get(
-          'api/resource/Item?limit_page_length=None&fields=["*"]');
+      final response = await http.get(
+          Uri.parse(
+              '${THttpHelper.baseUrl}/api/resource/Item?limit_page_length=None&fields=["*"]'),
+          headers: {
+            'authorization':
+                'token ${GetStorage().read('apikey')}:${GetStorage().read('apisecret')}',
+          });
 
-      if (response.isNotEmpty && response.elementAt(0) == 200) {
-        final responseData = response.elementAt(1)['data'];
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+
+        final responseData = responseBody['data'];
 
         if (responseData != null) {
           for (var curData in responseData) {

@@ -158,7 +158,25 @@ class CreateNewPassword extends StatelessWidget {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      signUpController.signUp();
+                      if (signUpController.passwordController.text.isEmpty ||
+                          signUpController
+                              .confirmPasswordController.text.isEmpty) {
+                        // Show a snackbar for empty passwords
+                        signUpController.passwordController.text.isEmpty
+                            ? THelperFunctions.showSnackBar(
+                                'Please enter a new password ', context, false)
+                            : THelperFunctions.showSnackBar(
+                                'Please confirm the password', context, false);
+                      } else if (!THelperFunctions.isValidPassword(
+                              signUpController.passwordController.text) ||
+                          !THelperFunctions.isValidPassword(signUpController
+                              .confirmPasswordController.text)) {
+                        // Show a snackbar for weak passwords
+                        THelperFunctions.showSnackBar(
+                            'Please enter a strong password', context, false);
+                      } else {
+                        signUpController.signUp(); // Run the signUp function
+                      }
                     },
                     child: signUpController.isLoading.value
                         ? const CircularProgressIndicator()
