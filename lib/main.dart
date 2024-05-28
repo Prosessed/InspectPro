@@ -11,7 +11,7 @@ void main() async {
   await GetStorage.init();
 
   final box = GetStorage();
-  // Add listener for changes
+  // Add listener for change
   box.listenKey('full_name', (value) {
     // Handle user name changes here
     print('full_name changed: $value');
